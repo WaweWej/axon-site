@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Oplyst · Danmarks gratis AI vidensbank">
 <meta name="twitter:description" content="Gratis AI viden til danske ledere og teams. Folkeoplysning for AI alderen.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%236366f1'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23a78bfa' stroke-width='1.4' opacity='.65'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23818cf8'/%3E%3Cstop offset='1' stop-color='%23fbbf24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Cpath d='M16 6 c-4 0-7.2 3-7.2 7 0 2.4 1.2 4 2.3 5.2 0.7 0.8 1.3 1.4 1.3 2.5 h7.2 c0-1.1 0.6-1.7 1.3-2.5 1.1-1.2 2.3-2.8 2.3-5.2 C23.2 9 20 6 16 6Z' fill='none' stroke='url(%23g)' stroke-width='1.7'/%3E%3Cpath d='M13 24.5 h6 M13.8 27 h4.4' stroke='url(%23g)' stroke-width='1.7' stroke-linecap='round'/%3E%3Ctext x='16' y='17.6' text-anchor='middle' font-family='monospace' font-size='8' font-weight='700' fill='url(%23g)'%3E10%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -73,6 +73,8 @@
     background:linear-gradient(to bottom, rgba(5,7,13,.82), rgba(5,7,13,.42));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
   .brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.16em;display:flex;align-items:center;gap:10px}
   .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);transition:background .6s,box-shadow .6s}
+  .mark{width:23px;height:23px;flex:none;filter:drop-shadow(0 0 7px rgba(129,140,248,.55))}
+  .f-brand .mark{width:20px;height:20px}
   nav.links{display:flex;gap:30px;align-items:center;position:relative}
   nav.links a{font-size:14px;color:var(--ink-soft);transition:color .3s;font-variant-numeric:tabular-nums;display:inline-block}
   nav.links a:hover{color:var(--ink)}
@@ -149,6 +151,11 @@
   .cat .step{margin:0;max-width:540px;flex:1 1 auto}
   .sec-floats{display:flex;align-items:flex-start;gap:clamp(14px,1.6vw,28px);flex:0 0 auto}
   .sec-floats .float-card:nth-child(2){margin-top:64px}
+  #hero.cat .hero-wrap{max-width:600px;flex:1 1 auto}
+  .hero-floats{display:flex;flex-direction:column;gap:18px;flex:0 0 auto;pointer-events:auto}
+  .floats-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;text-shadow:0 0 6px rgba(5,7,13,.85)}
+  .floats-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  @media(max-width:900px){#hero.cat .hero-wrap{max-width:none}}
   @media(max-width:900px){
     .cat-inner,.cat.right .cat-inner{flex-direction:column;justify-content:center;gap:42px;min-height:0;padding-block:clamp(70px,11vh,110px)}
     .cat .step{max-width:none}
@@ -403,8 +410,19 @@
   <div class="fade-top" aria-hidden="true"></div>
   <div class="fade-bot" aria-hidden="true"></div>
 
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <linearGradient id="oplyst-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#818cf8"/><stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <symbol id="oplyst-mark" viewBox="0 0 32 32">
+      <path d="M16 5 c-4.6 0-8.3 3.4-8.3 7.9 0 2.8 1.4 4.7 2.7 6.1 0.8 0.9 1.5 1.6 1.5 2.8 h8.2 c0-1.2 0.7-1.9 1.5-2.8 1.3-1.4 2.7-3.3 2.7-6.1 C24.3 8.4 20.6 5 16 5Z" fill="none" stroke="url(#oplyst-g)" stroke-width="1.7"/>
+      <path d="M12.5 24.6 h7 M13.3 27.4 h5.4" fill="none" stroke="url(#oplyst-g)" stroke-width="1.7" stroke-linecap="round"/>
+      <text x="16" y="17.4" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" font-weight="600" fill="url(#oplyst-g)">10</text>
+    </symbol>
+  </svg>
+
   <header>
-    <div class="brand"><span class="dot"></span>Oplyst</div>
+    <div class="brand"><svg class="mark" aria-hidden="true"><use href="#oplyst-mark"/></svg>Oplyst</div>
     <nav class="links">
       <a href="library/">Bibliotek</a>
       <a href="#audit">Indhold</a>
@@ -425,14 +443,29 @@
   </div>
 
   <main>
-    <section id="hero" data-formation="0" data-side="left">
-      <div class="hero-wrap">
-        <div class="kicker reveal">Danmarks AI vidensbank</div>
-        <h1 class="reveal">Gratis AI viden til<br>danske <span class="grad">ledere og teams.</span></h1>
-        <p class="reveal">Guider, sammenligninger, tjeklister, promptbibliotek og playbooks. Skrevet af folk, der bygger AI, ikke sælger kurser. Alt er gratis. Støt med en donation, hvis det hjalp.</p>
-        <div class="cta-row reveal">
-          <a href="library/" class="btn btn-primary">Udforsk vidensbanken →</a>
-          <a href="#advisory" class="btn btn-ghost">Få skræddersyet hjælp</a>
+    <section id="hero" class="cat" data-formation="0" data-side="left">
+      <div class="cat-inner">
+        <div class="hero-wrap">
+          <div class="kicker reveal">Danmarks AI vidensbank</div>
+          <h1 class="reveal">Gratis AI viden til<br>danske <span class="grad">ledere og teams.</span></h1>
+          <p class="reveal">Guider, sammenligninger, tjeklister, promptbibliotek og playbooks. Skrevet af folk, der bygger AI, ikke sælger kurser. Alt er gratis. Støt med en donation, hvis det hjalp.</p>
+          <div class="cta-row reveal">
+            <a href="library/" class="btn btn-primary">Udforsk vidensbanken →</a>
+            <a href="#advisory" class="btn btn-ghost">Få skræddersyet hjælp</a>
+          </div>
+        </div>
+        <div class="hero-floats reveal">
+          <div class="floats-label">Mest populære i denne uge</div>
+          <div class="sec-floats">
+            <a class="float-card" href="library/chatgpt-vs-copilot-vs-claude.html" style="--i:0;--amp:24px;--rot:-2deg;--tc:244,86,156">
+              <span class="fc-badge">Sammenligning</span><h3>ChatGPT vs Copilot vs Claude</h3>
+              <p>Hvilken AI passer til jeres arbejde? Den ærlige sammenligning.</p><span class="fc-go">Hent →</span>
+            </a>
+            <a class="float-card" href="library/workflow-audit-in-a-week.html" style="--i:1;--amp:30px;--rot:2deg;--tc:91,140,255">
+              <span class="fc-badge">Guide</span><h3>AI Arbejdsgangs Kit</h3>
+              <p>Find på en eftermiddag det sted, hvor AI giver mest.</p><span class="fc-go">Hent →</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -575,7 +608,7 @@
       <a class="gallery-all" href="library/">Se hele biblioteket →</a>
     </section>
 
-    <section id="donate" class="donate-sec" data-side="center">
+    <section id="donate" class="donate-sec" data-formation="4" data-side="center">
       <div class="donate-wrap">
         <div class="kicker reveal">Gratis. For altid.</div>
         <h2 class="reveal">Vidensbanken er gratis.<br>Støt den, hvis den hjalp.</h2>
@@ -586,7 +619,7 @@
       </div>
     </section>
 
-    <section id="advisory" class="outro" data-side="center">
+    <section id="advisory" class="outro" data-formation="5" data-side="center">
       <div class="hero-wrap" style="text-align:center;max-width:760px">
         <div class="kicker reveal" style="margin-inline:auto">Brug for mere end viden?</div>
         <h2 class="reveal" style="font-family:var(--display);font-weight:700;font-size:clamp(34px,5.4vw,68px);line-height:1.02;letter-spacing:-.03em">Vi bygger også AI ind<br>i jeres forretning.</h2>
@@ -599,7 +632,7 @@
   <footer class="site-footer">
     <div class="f-top">
       <div class="f-brandwrap">
-        <div class="f-brand"><span class="dot"></span>Oplyst</div>
+        <div class="f-brand"><svg class="mark" aria-hidden="true"><use href="#oplyst-mark"/></svg>Oplyst</div>
         <p class="f-tag">Danmarks AI vidensbank. Gratis guider, skabeloner og playbooks til danske ledere og teams. Skrevet af folk, der bygger AI.</p>
       </div>
       <div class="f-cols">
@@ -756,10 +789,10 @@
   // per-stage colour identity — distinct dominant hue per section, blue kept as undertone
   // hero=blue  audit=cyan  deploy=violet  upskill=amber  impact=rose
   // Oplyst palette — indigo to warm gold (oplysning / dawn), not cold AI blue
-  const PAL_A = [0x6366f1,0x818cf8,0xc084fc,0xfbbf24,0xf59e0b].map(h=>new THREE.Color(h));
-  const PAL_B = [0xa78bfa,0x6366f1,0xfbbf24,0xfcd34d,0xfbbf24].map(h=>new THREE.Color(h));
+  const PAL_A = [0x6366f1,0x818cf8,0xc084fc,0xfbbf24,0xf59e0b,0xfbbf24].map(h=>new THREE.Color(h));
+  const PAL_B = [0xa78bfa,0x6366f1,0xfbbf24,0xfcd34d,0xfbbf24,0xfff3d6].map(h=>new THREE.Color(h));
 
-  const N = MOBILE ? 200 : 300, STAGES = 5, TAU = Math.PI*2;
+  const N = MOBILE ? 200 : 300, STAGES = 6, TAU = Math.PI*2;
   const stagePos = Array.from({length:STAGES}, () => new Float32Array(N*3));
   const nodeHue = new Float32Array(N);
   const set = (arr,i,x,y,z)=>{ arr[i*3]=x; arr[i*3+1]=y; arr[i*3+2]=z; };
@@ -777,6 +810,21 @@
       set(stagePos[3], i, (lane-(lanes-1)/2)*3.9+Math.sin(tt*6+lane)*2.0, (tt-0.5)*34, Math.cos(tt*5+lane*1.3)*4); }
     { const tt=r, ang=tt*TAU*5, rad=(1-tt)*9+1.2;
       set(stagePos[4], i, Math.cos(ang)*rad, (tt-0.5)*30, Math.sin(ang)*rad); }
+    // formation 5: a giant binary lightbulb (Oplyst) — the payoff at the end of the scroll
+    { const Rb=13.2, CY=4.2, Wb=4.9, baseTop=CY-Rb*0.9, baseH=8.0, glassN=Math.floor(N*0.74);
+      if (i < glassN){
+        const u=(i*0.6180339887)%1, vv=(i*0.41421356237)%1;
+        let rr=Rb*Math.sqrt(u), a=TAU*vv;
+        let x=Math.cos(a)*rr, y=CY+Math.sin(a)*rr;
+        const low=(CY-y)/Rb;                       // 0 at center, ->1 toward the neck
+        if (low>0.22){ x*=Math.max(0.30, 1-(low-0.22)*0.74); }
+        set(stagePos[5], i, x, y, Math.sin(i*1.3)*1.7);
+      } else {
+        const kk=(i-glassN)/(N-glassN);            // 0 (top of screw base) -> 1 (bottom)
+        const half=Wb*(0.5 - kk*0.14);
+        const xv=(((i*0.7548776662)%1)*2-1)*half;
+        set(stagePos[5], i, xv, baseTop - kk*baseH, Math.sin(i*1.3)*1.2);
+      } }
   }
 
   const introStart = new Float32Array(N*3);
@@ -993,9 +1041,11 @@
 
     if (fcount%6===0){ root.style.setProperty('--accent', '#'+cA.getHexString()); root.style.setProperty('--accent-2', '#'+cB.getHexString()); }
 
-    world.rotation.y = t*0.03 + mouse.x*0.35;
-    world.rotation.x = mouse.y*0.20 - 0.05;
-    world.rotation.z = Math.max(-0.07, Math.min(0.07, vel*-0.0009)); // scroll roll
+    const bulbAmt = Math.max(0, Math.min(1, formF-4)); // 0 at formation 4, 1 when fully the lightbulb
+    const spin = 1-bulbAmt;
+    world.rotation.y = (t*0.03 + mouse.x*0.35)*spin + mouse.x*0.10*bulbAmt; // face the camera as the bulb forms
+    world.rotation.x = (mouse.y*0.20 - 0.05)*spin + mouse.y*0.10*bulbAmt;
+    world.rotation.z = Math.max(-0.07, Math.min(0.07, vel*-0.0009))*spin; // scroll roll
     world.scale.set(1 - vN*0.05, 1 + vN*0.11, 1 - vN*0.05); // velocity smear
     camera.position.x += (mouse.x*4 - camera.position.x)*0.04;
     camera.position.y += (-mouse.y*3 - camera.position.y)*0.04;
