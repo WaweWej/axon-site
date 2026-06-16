@@ -156,6 +156,17 @@
   .floats-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;text-shadow:0 0 6px rgba(5,7,13,.85)}
   .floats-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
   @media(max-width:900px){#hero.cat .hero-wrap{max-width:none}}
+  /* hero: smaller cards tucked into the top-right corner so the central visual breathes */
+  @media(min-width:901px){
+    #hero .hero-floats{align-self:flex-start;align-items:flex-end;text-align:right;gap:13px;margin-top:6px}
+    #hero .sec-floats{gap:13px}
+    #hero .float-card{width:clamp(142px,12.4vw,178px);padding:17px 16px;border-radius:17px;gap:8px}
+    #hero .float-card h3{font-size:15px;line-height:1.18;margin-top:2px}
+    #hero .float-card p{font-size:12px;line-height:1.45}
+    #hero .float-card .fc-badge{font-size:9px;padding:5px 9px;letter-spacing:.13em}
+    #hero .float-card .fc-go{font-size:12px}
+    #hero .sec-floats .float-card:nth-child(2){margin-top:42px}
+  }
   @media(max-width:900px){
     .cat-inner,.cat.right .cat-inner{flex-direction:column;justify-content:center;gap:42px;min-height:0;padding-block:clamp(70px,11vh,110px)}
     .cat .step{max-width:none}
