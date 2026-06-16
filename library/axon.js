@@ -227,9 +227,9 @@
     heads.forEach(wrap);
     addEventListener('mousemove', e=>root.style.setProperty('--hue', (e.clientX/innerWidth*360)|0), {passive:true});
     if(!REDUCED) heads.forEach(h=>{
-      const tick=()=>setTimeout(()=>{ flick(); tick(); }, 9000+Math.random()*11000);
+      const tick=()=>setTimeout(()=>{ flick(); tick(); }, 3200+Math.random()*4200);
       function flick(){ const chs=h.querySelectorAll('.ch'); if(!chs.length) return;
-        const k=1+(Math.random()<.5?1:0), picks=[]; for(let i=0;i<k;i++) picks.push(chs[(Math.random()*chs.length)|0]);
+        const k=2+(Math.random()*3|0), picks=[]; for(let i=0;i<k;i++) picks.push(chs[(Math.random()*chs.length)|0]);
         let f=0; const iv=setInterval(()=>{ f++; if(f>4){ clearInterval(iv); picks.forEach(s=>s.textContent=s.dataset.c); return; }
           picks.forEach(s=> s.textContent=Math.random()<.5?'0':'1'); }, 85); }
       tick();

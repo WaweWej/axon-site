@@ -51,7 +51,7 @@
   @media (prefers-reduced-motion: reduce){ .loader-brand{animation:none} }
 
   #gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
-  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.045;mix-blend-mode:screen;
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.025;mix-blend-mode:screen;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
   .fade-top{position:fixed;top:0;left:0;right:0;height:160px;z-index:2;pointer-events:none;
     background:linear-gradient(to bottom, rgba(5,7,13,.9), transparent)}
@@ -92,12 +92,12 @@
   .reveal:nth-child(3){transition-delay:.16s}
   .reveal:nth-child(4){transition-delay:.24s}
 
-  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;transition:color .6s}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.38em;text-transform:uppercase;color:var(--accent);margin-bottom:26px;transition:color .6s}
   .hero-wrap{max-width:980px;position:relative}
   /* legibility comes from per-glyph halos (below), not a background block */
-  h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,6.6vw,92px);line-height:1.02;letter-spacing:-.02em;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(38px,5.7vw,82px);line-height:1.04;letter-spacing:-.028em;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
   h1 .grad{background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .hero-wrap p{margin-top:28px;max-width:560px;font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:#c5cee4;text-shadow:0 0 3px rgba(5,7,13,.95),0 0 9px rgba(5,7,13,.82),0 1px 1px rgba(5,7,13,1)}
+  .hero-wrap p{margin-top:32px;max-width:540px;font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:#cdd6ea;text-shadow:0 0 3px rgba(5,7,13,.95),0 0 9px rgba(5,7,13,.82),0 1px 1px rgba(5,7,13,1)}
   .cta-row{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;pointer-events:auto}
   .btn{font-family:var(--body);font-weight:600;font-size:15px;padding:15px 28px;border-radius:100px;transition:.3s var(--ease);display:inline-flex;align-items:center;gap:9px}
   .btn-primary{background:linear-gradient(100deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 12px 40px -10px var(--accent)}
@@ -108,7 +108,7 @@
   .step{max-width:620px;position:relative}
   .step .num{font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:#b9c2d8;display:flex;align-items:center;gap:14px;margin-bottom:20px;text-shadow:0 0 4px rgba(5,7,13,.9),0 1px 1px rgba(5,7,13,1)}
   .step .num::after{content:"";height:1px;width:60px;background:var(--line)}
-  .step h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4.4vw,56px);line-height:1.05;letter-spacing:-.015em;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
+  .step h2{font-family:var(--display);font-weight:600;font-size:clamp(33px,5vw,64px);line-height:1.0;letter-spacing:-.025em;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
   .step p{margin-top:20px;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#c5cee4;text-shadow:0 0 3px rgba(5,7,13,.95),0 0 9px rgba(5,7,13,.82),0 1px 1px rgba(5,7,13,1)}
   .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
   .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:7px 13px;border-radius:100px;border:1px solid rgba(255,255,255,.14);color:#c5cee4;background:rgba(5,7,13,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
@@ -120,7 +120,7 @@
 
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .outro{flex-direction:column;justify-content:center;text-align:center;align-items:center;position:relative}
-  .outro h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,6vw,80px);line-height:1.02;letter-spacing:-.02em;max-width:16ch;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
+  .outro h2{font-family:var(--display);font-weight:700;font-size:clamp(40px,6.6vw,92px);line-height:.98;letter-spacing:-.035em;max-width:15ch;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
   .outro p{margin-top:22px;max-width:48ch;color:#c5cee4;font-size:18px;line-height:1.6;text-shadow:0 0 3px rgba(5,7,13,.95),0 0 9px rgba(5,7,13,.82),0 1px 1px rgba(5,7,13,1)}
 
   .rail{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:14px}
@@ -131,6 +131,21 @@
   .hint .bar{width:30px;height:1px;background:var(--ink-soft);position:relative;overflow:hidden}
   .hint .bar::after{content:"";position:absolute;inset:0;background:var(--accent);animation:sweep 2s var(--ease) infinite}
   @keyframes sweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+  /* sound toggle */
+  .sound-toggle{position:fixed;left:clamp(20px,5vw,56px);bottom:28px;z-index:30;display:flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+    background:rgba(5,7,13,.42);border:1px solid var(--line);border-radius:100px;padding:9px 16px;cursor:pointer;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+  .sound-toggle:hover{color:var(--ink);border-color:rgba(255,255,255,.26);transform:translateY(-2px)}
+  .sound-toggle .eq{display:flex;align-items:flex-end;gap:2px;height:12px}
+  .sound-toggle .eq i{width:2px;height:3px;background:var(--ink-soft);border-radius:1px}
+  .sound-toggle.on{color:var(--ink)}
+  .sound-toggle.on .eq i{background:var(--accent);animation:eq .85s ease-in-out infinite}
+  .sound-toggle.on .eq i:nth-child(2){animation-delay:.18s}
+  .sound-toggle.on .eq i:nth-child(3){animation-delay:.36s}
+  @keyframes eq{0%,100%{height:3px}50%{height:12px}}
+  @media(max-width:560px){.sound-toggle{display:none}}
 
   /* ===== binary buttons: the fill is live 0/1, label decodes on hover ===== */
   .btn,.gallery-all{position:relative;overflow:hidden;isolation:isolate}
@@ -162,7 +177,7 @@
 
   /* ===== phase 2: statement / pinned process / proof ===== */
   .statement{justify-content:flex-start}
-  .statement .big{font-family:var(--display);font-weight:600;font-size:clamp(34px,6.4vw,92px);line-height:1.05;letter-spacing:-.02em;max-width:20ch;font-variant-numeric:tabular-nums}
+  .statement .big{font-family:var(--display);font-weight:600;font-size:clamp(38px,7vw,108px);line-height:1.0;letter-spacing:-.035em;max-width:18ch;font-variant-numeric:tabular-nums}
   .statement .big span{display:block;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
   .statement .big span:nth-child(2){transition-delay:.12s}
   .statement .big em{font-style:normal;background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -506,6 +521,9 @@
 
   <div class="rail" id="rail"></div>
   <div class="hint" id="hint"><span class="bar"></span>Scroll</div>
+  <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound" aria-pressed="false">
+    <span class="eq"><i></i><i></i><i></i></span><span id="soundLabel">Sound</span>
+  </button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
@@ -1066,10 +1084,10 @@
   addEventListener('mousemove', e => root.style.setProperty('--hue', (e.clientX / innerWidth * 360) | 0), {passive:true});
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
     heads.forEach(h => {
-      const tick = () => setTimeout(() => { flick(); tick(); }, 9000 + Math.random()*11000);
+      const tick = () => setTimeout(() => { flick(); tick(); }, 3200 + Math.random()*4200);
       function flick(){
         const chs = h.querySelectorAll('.ch'); if (!chs.length) return;
-        const k = 1 + (Math.random()<.5?1:0), picks = [];
+        const k = 2 + (Math.random()*3|0), picks = [];
         for (let i=0;i<k;i++) picks.push(chs[(Math.random()*chs.length)|0]);
         let f = 0; const iv = setInterval(() => { f++;
           if (f > 4){ clearInterval(iv); picks.forEach(s => s.textContent = s.dataset.c); return; }
@@ -1117,6 +1135,57 @@
     a.addEventListener('mouseleave', () => { hovering = false; clearInterval(a._d); a.textContent = a.dataset.orig; a.style.width = ''; move(active); });
   });
   addEventListener('resize', () => move(hovering ? null : active));
+})();
+</script>
+<script>
+/* Synthesized sound layer (no audio files): ambient pad + UI ticks, whooshes. Off by default. */
+(() => {
+  const toggle = document.getElementById('soundToggle'), label = document.getElementById('soundLabel');
+  if (!toggle) return;
+  let ctx, master, on = false, amb = null;
+
+  function init(){
+    if (ctx) return;
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+  }
+  function env(node, vol, t0, attack, dur){ const g = ctx.createGain(); g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(vol, t0 + attack); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    node.connect(g); g.connect(master); return g; }
+  function blip(freq, dur, type, vol){ if (!on) return; const o = ctx.createOscillator(); o.type = type || 'sine';
+    const t = ctx.currentTime; o.frequency.setValueAtTime(freq, t); env(o, vol, t, 0.004, dur); o.start(t); o.stop(t + dur + 0.02); }
+  const tick = () => blip(1250 + Math.random()*250, 0.05, 'triangle', 0.05);
+  const select = () => { if (!on) return; blip(620, 0.07, 'sine', 0.10); setTimeout(() => blip(960, 0.10, 'sine', 0.07), 38); };
+  function whoosh(){ if (!on) return; const t = ctx.currentTime;
+    const buf = ctx.createBuffer(1, ctx.sampleRate*0.5, ctx.sampleRate), d = buf.getChannelData(0);
+    for (let i=0;i<d.length;i++) d[i] = (Math.random()*2-1) * (1 - i/d.length);
+    const src = ctx.createBufferSource(); src.buffer = buf;
+    const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 520; f.Q.value = 0.8;
+    src.connect(f); env(f, 0.08, t, 0.06, 0.42); src.start(t); }
+  function startAmbient(){
+    if (amb) return;
+    const o1 = ctx.createOscillator(), o2 = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+    o1.type = o2.type = 'sine'; o1.frequency.value = 55; o2.frequency.value = 55.35;
+    f.type = 'lowpass'; f.frequency.value = 380; g.gain.value = 0.03;
+    o1.connect(f); o2.connect(f); f.connect(g); g.connect(master);
+    const lfo = ctx.createOscillator(), la = ctx.createGain(); lfo.frequency.value = 0.05; la.gain.value = 160;
+    lfo.connect(la); la.connect(f.frequency);
+    o1.start(); o2.start(); lfo.start(); amb = {};
+  }
+  function enable(){ init(); if (ctx.resume) ctx.resume(); on = true; startAmbient();
+    master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.5);
+    toggle.classList.add('on'); toggle.setAttribute('aria-pressed','true'); label.textContent = 'Sound on'; }
+  function disable(){ on = false; if (master) master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+    toggle.classList.remove('on'); toggle.setAttribute('aria-pressed','false'); label.textContent = 'Sound'; }
+  toggle.addEventListener('click', () => on ? disable() : enable());
+
+  // hooks
+  const inter = '.btn, .nav-cta, nav.links a, .float-card, .filter, .opt, .gallery-all, .wizard-close, .f-col a';
+  document.querySelectorAll(inter).forEach(el => el.addEventListener('mouseenter', tick));
+  document.querySelectorAll('.btn, .float-card, .opt, .gallery-all').forEach(el => el.addEventListener('click', select));
+  let lastSec = null;
+  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && e.target !== lastSec){ lastSec = e.target; whoosh(); } }), {threshold:.55});
+  document.querySelectorAll('section[data-formation]').forEach(s => so.observe(s));
 })();
 </script>
 </body>
