@@ -124,11 +124,16 @@ const footerLinks = `<footer class="site"><div class="frame">
 
 const pagesLabel = n => n ? ` · ${n} ${n==1?'page':'pages'}` : '';
 
+// per document-type colour (rgb triplet), matching the main site's section palette
+const TYPE_RGB = { Guide:'91,140,255', Template:'34,211,238', Checklist:'168,85,247',
+  Playbook:'245,158,11', Tutorial:'45,212,191', Toolkit:'244,86,156' };
+const tcOf = p => TYPE_RGB[p.type] || '91,140,255';
+
 const getBtn = (p, label) => p.gated
   ? `<button class="btn btn-primary" data-get data-title="${esc(p.title)}" data-type="${esc(p.type)}" data-file="${esc(p.file)}">${label} →</button>`
   : `<a class="btn btn-primary" href="${esc(p.file)}" download>${label} →</a>`;
 
-const card = p => `<div class="card rv" data-cat="${esc(p.type)}">
+const card = p => `<div class="card rv" data-cat="${esc(p.type)}" style="--tc:${tcOf(p)}">
   <div class="c-art"><span class="badge">${esc(p.type)}</span></div>
   <div class="c-body">
     <div class="meta-row">${esc(p.format)}${pagesLabel(p.pages)}<span class="dotsep"></span>${esc(p.level||'All levels')}</div>
@@ -180,7 +185,7 @@ header + `
     <div class="filters rv">${filterBtns}</div>
   </div>
   <div class="frame">
-    ${feat ? `<div class="featured rv" data-cat="${esc(feat.type)}">
+    ${feat ? `<div class="featured rv" data-cat="${esc(feat.type)}" style="--tc:${tcOf(feat)}">
       <div class="f-body">
         <div class="meta-row"><span class="type">Featured · ${esc(feat.type)}</span><span class="dotsep"></span>${esc(feat.format)}${pagesLabel(feat.pages)}</div>
         <h2><a href="${feat.slug}.html">${esc(feat.title)}</a></h2>
