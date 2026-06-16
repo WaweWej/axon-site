@@ -7,7 +7,6 @@ pages: 14
 level: Alle niveauer
 file: files/workflow-audit-in-a-week.pdf
 gated: true
-featured: true
 date: 2026-06-12
 ---
 
