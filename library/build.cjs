@@ -1,4 +1,4 @@
-/* AXON Library — resource hub build: posts/*.md -> index.html + <slug>.html (+ placeholder PDFs)
+/* Oplyst Library — resource hub build: posts/*.md -> index.html + <slug>.html (+ placeholder PDFs)
    Run:  node library/build.cjs                                                          */
 const fs = require('fs'), path = require('path');
 const DIR = __dirname;
@@ -29,7 +29,7 @@ const fmtDate = s => { const d = new Date(s); return isNaN(d) ? (s||'') : d.toLo
 /* ---- minimal placeholder PDF (only created if a real file isn't there) ---- */
 function makePdf(title, sub){
   const e = s => String(s).replace(/[\\()]/g, m => '\\'+m);
-  const content = `BT /F1 26 Tf 60 770 Td (${e(title)}) Tj 0 -36 Td /F1 13 Tf (${e(sub)}) Tj 0 -28 Td (AXON. Erstat denne midlertidige fil med den rigtige guide.) Tj ET`;
+  const content = `BT /F1 26 Tf 60 770 Td (${e(title)}) Tj 0 -36 Td /F1 13 Tf (${e(sub)}) Tj 0 -28 Td (Oplyst. Erstat denne midlertidige fil med den rigtige guide.) Tj ET`;
   const objs = [
     '<</Type/Catalog/Pages 2 0 R>>',
     '<</Type/Pages/Kids[3 0 R]/Count 1>>',
@@ -60,7 +60,7 @@ const head = (title, desc, og, bodyClass, bodyAttr) => `<!DOCTYPE html>
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%235b8cff'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%239b6bff' stroke-width='1.4' opacity='.65'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%236366f1'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23a78bfa' stroke-width='1.4' opacity='.65'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -74,7 +74,7 @@ const head = (title, desc, og, bodyClass, bodyAttr) => `<!DOCTYPE html>
 <div class="wrap">`;
 
 const header = `<header class="site">
-  <a class="brand" href="${SITE}"><span class="dot"></span>AXON <small>/ Bibliotek</small></a>
+  <a class="brand" href="${SITE}"><span class="dot"></span>Oplyst <small>/ Bibliotek</small></a>
   <nav class="site-nav">
     <a href="${SITE}">Forsiden</a>
     <a href="index.html" class="active">Bibliotek</a>
@@ -130,7 +130,7 @@ ${modal}
 </body></html>`;
 
 const footerLinks = `<footer class="site"><div class="frame">
-  <div class="copy">© AXON · AI som driftsfordel.</div>
+  <div class="copy">© Oplyst · AI som driftsfordel.</div>
   <div class="f-links"><a href="${SITE}">Forsiden</a><a href="index.html">Bibliotek</a><a href="${SITE}?wizard=1">Få en AI audit</a></div>
 </div></footer>`;
 
@@ -187,8 +187,8 @@ const rest = posts.filter(p => p !== feat);
 const filterBtns = ['all', ...types].map((c,i) =>
   `<button class="filter${i===0?' on':''}" data-filter="${esc(c)}">${i===0?'Alle ressourcer':esc(c)}</button>`).join('');
 
-const hub = head('AXON Bibliotek · gratis AI guider, skabeloner og værktøjer',
-  'Gennemarbejdede guider, skabeloner og drejebøger til at få AI i arbejde. Kortlægning af arbejdsgange, tjeklister til drift og forankring i teamet, fra AXON.') +
+const hub = head('Oplyst Bibliotek · gratis AI guider, skabeloner og værktøjer',
+  'Gennemarbejdede guider, skabeloner og drejebøger til at få AI i arbejde. Kortlægning af arbejdsgange, tjeklister til drift og forankring i teamet, fra Oplyst.') +
 header + `
 <main>
   <div class="frame hub-head">
@@ -218,7 +218,7 @@ fs.writeFileSync(path.join(DIR, 'index.html'), hub);
 /* ---- resource landing pages ---- */
 for (const p of posts){
   const related = posts.filter(x => x !== p).slice(0, 3);
-  const page = head(p.title + ' · AXON Bibliotek', p.summary, 'article', 'reading', ` data-doctype="${esc(p.type)}"`) + `
+  const page = head(p.title + ' · Oplyst Bibliotek', p.summary, 'article', 'reading', ` data-doctype="${esc(p.type)}"`) + `
 <div class="read-progress" aria-hidden="true"></div>` + header + `
 <article>
   <div class="res-head frame">

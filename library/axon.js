@@ -1,4 +1,4 @@
-/* AXON shared atmosphere — the same living network, cursor, binary buttons & smooth
+/* Oplyst shared atmosphere — the same living network, cursor, binary buttons & smooth
    scroll as the main site, in a calm ambient mode for content pages. */
 (() => {
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -194,7 +194,7 @@
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errEl.textContent='En gyldig mail, tak.'; return; }
       submit.style.pointerEvents='none';
       try{ if (WEB3FORMS_KEY){ const fd=new FormData(); fd.append('access_key',WEB3FORMS_KEY);
-          fd.append('subject','Bibliotek download · '+(current.title||'')); fd.append('from_name','AXON Bibliotek'); fd.append('replyto',email);
+          fd.append('subject','Bibliotek download · '+(current.title||'')); fd.append('from_name','Oplyst Bibliotek'); fd.append('replyto',email);
           fd.append('Navn',name); fd.append('Mail',email); fd.append('Ressource',current.title||''); fd.append('Type',current.type||'');
           await fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}); }
         else console.warn('[library] lead captured (no WEB3FORMS_KEY set):',{name,email,resource:current.title}); }
