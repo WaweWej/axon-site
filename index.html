@@ -573,6 +573,27 @@
       </div>
     </section>
 
+    <section id="skab" class="cat" data-formation="5" data-side="left">
+      <div class="cat-inner">
+        <div class="step">
+          <div class="num reveal">05 · Skab</div>
+          <h2 class="reveal">Skab dine egne<br>AI værktøjer.</h2>
+          <p class="reveal">E-bøger og drejebøger til selv at bygge AI ind i forretningen: bogføringsassistenter, custom agenter og automatik til kalender og mails. Helt uden at være udvikler.</p>
+          <a class="step-cta reveal" href="library/">Se alle e-bøger →</a>
+        </div>
+        <div class="sec-floats reveal">
+          <a class="float-card" href="library/byg-ai-bogfoeringsassistent.html" style="--i:0;--amp:24px;--rot:-2deg;--tc:34,197,94">
+            <span class="fc-badge">E-bog</span><h3>Byg din egen AI bogføringsassistent</h3>
+            <p>Læser bilag, foreslår kontering, klar til revisoren.</p><span class="fc-go">Hent →</span>
+          </a>
+          <a class="float-card" href="library/byg-custom-ai-agent.html" style="--i:1;--amp:30px;--rot:2deg;--tc:34,197,94">
+            <span class="fc-badge">E-bog</span><h3>Byg en custom AI agent til teamet</h3>
+            <p>En agent, der kender jeres egne dokumenter.</p><span class="fc-go">Hent →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section id="gallery" class="gallery">
       <div class="gallery-head">
         <div class="kicker reveal">Mest hentede</div>
@@ -620,7 +641,7 @@
       <a class="gallery-all" href="library/">Se hele biblioteket →</a>
     </section>
 
-    <section id="advisory" class="outro" data-formation="5" data-side="center">
+    <section id="advisory" class="outro" data-formation="6" data-side="center">
       <div class="hero-wrap" style="text-align:center;max-width:780px">
         <div class="kicker reveal" style="margin-inline:auto">Brug for mere end viden?</div>
         <h2 class="reveal" style="font-family:var(--display);font-weight:700;font-size:clamp(34px,5.4vw,68px);line-height:1.02;letter-spacing:-.03em">Vi bygger også AI ind<br>i jeres forretning.</h2>
@@ -771,10 +792,10 @@
   // per-stage colour identity — distinct dominant hue per section, blue kept as undertone
   // hero=blue  audit=cyan  deploy=violet  upskill=amber  impact=rose
   // Oplyst palette — indigo to warm gold (oplysning / dawn), not cold AI blue
-  const PAL_A = [0x6366f1,0x818cf8,0xc084fc,0xfbbf24,0xf59e0b,0xfbbf24].map(h=>new THREE.Color(h));
-  const PAL_B = [0xa78bfa,0x6366f1,0xfbbf24,0xfcd34d,0xfbbf24,0xfff3d6].map(h=>new THREE.Color(h));
+  const PAL_A = [0x6366f1,0x818cf8,0xc084fc,0xfbbf24,0xf59e0b,0x22c55e,0xfbbf24].map(h=>new THREE.Color(h));
+  const PAL_B = [0xa78bfa,0x6366f1,0xfbbf24,0xfcd34d,0xfbbf24,0x34d399,0xfff3d6].map(h=>new THREE.Color(h));
 
-  const N = MOBILE ? 200 : 300, STAGES = 6, TAU = Math.PI*2;
+  const N = MOBILE ? 200 : 300, STAGES = 7, TAU = Math.PI*2;
   const stagePos = Array.from({length:STAGES}, () => new Float32Array(N*3));
   const nodeHue = new Float32Array(N);
   const set = (arr,i,x,y,z)=>{ arr[i*3]=x; arr[i*3+1]=y; arr[i*3+2]=z; };
@@ -792,9 +813,12 @@
       set(stagePos[3], i, (lane-(lanes-1)/2)*3.9+Math.sin(tt*6+lane)*2.0, (tt-0.5)*34, Math.cos(tt*5+lane*1.3)*4); }
     { const tt=r, ang=tt*TAU*5, rad=(1-tt)*9+1.2;
       set(stagePos[4], i, Math.cos(ang)*rad, (tt-0.5)*30, Math.sin(ang)*rad); }
+    // formation 5: a torus (Skab resultater) — distinct ring/structure, building something
+    { const Rt=11, rt=3.7, aa=((i*0.61803398875)%1)*TAU, bb=((i*0.41421356237)%1)*TAU, rr=Rt+rt*Math.cos(bb);
+      set(stagePos[5], i, Math.cos(aa)*rr, rt*Math.sin(bb), Math.sin(aa)*rr); }
   }
 
-  // formation 5: a coherent giant binary lightbulb — the Oplyst payoff at the end of the scroll.
+  // formation 6: a coherent giant binary lightbulb — the Oplyst payoff at the end of the scroll.
   // crisp silhouette (glass arc + shoulders + screw base) on a rim, with the interior lit up.
   (function buildBulb(){
     const Rb=12.0, CY=5.6, aGap=0.82;                 // glass radius, centre, half-opening at the neck
@@ -820,17 +844,17 @@
         if (d<arcLen){ const a=aS+d/Rb; x=Math.cos(a)*Rb; y=CY+Math.sin(a)*Rb; }
         else { d-=arcLen; let k=0; while (k<sl.length-1 && d>sl[k]){ d-=sl[k]; k++; }
           const s=seg[k], tt=sl[k]?d/sl[k]:0; x=s[0]+(s[2]-s[0])*tt; y=s[1]+(s[3]-s[1])*tt; }
-        set(stagePos[5], i, x, y, z);
+        set(stagePos[6], i, x, y, z);
       } else if (i<rimN+baseFillN){                   // fill the screw base
         const k=(i-rimN)/baseFillN, xv=(((i*0.7548776662)%1)*2-1)*baseHalf*0.8;
-        set(stagePos[5], i, xv, baseTop-0.6-k*(baseH-1.2), z*0.6);
+        set(stagePos[6], i, xv, baseTop-0.6-k*(baseH-1.2), z*0.6);
       } else {                                        // light up the glass interior
         const j=i-rimN-baseFillN;
         const u=(j*0.61803398875)%1, vv=(j*0.41421356237)%1;
         const rr=Rb*0.9*Math.sqrt(u), a=TAU*vv;
         let x=Math.cos(a)*rr, y=CY+Math.sin(a)*rr;
         if (y<minY){ y=minY+(minY-y)*0.3; x*=0.55; }  // keep the neck gap clean
-        set(stagePos[5], i, x, y, z);
+        set(stagePos[6], i, x, y, z);
       }
     }
   })();
@@ -1049,7 +1073,7 @@
 
     if (fcount%6===0){ root.style.setProperty('--accent', '#'+cA.getHexString()); root.style.setProperty('--accent-2', '#'+cB.getHexString()); }
 
-    const bulbAmt = Math.max(0, Math.min(1, formF-4)); // 0 at formation 4, 1 when fully the lightbulb
+    const bulbAmt = Math.max(0, Math.min(1, formF-5)); // 0 at formation 5, 1 when fully the lightbulb
     const spin = 1-bulbAmt;
     world.rotation.y = (t*0.03 + mouse.x*0.35)*spin + mouse.x*0.10*bulbAmt; // face the camera as the bulb forms
     world.rotation.x = (mouse.y*0.20 - 0.05)*spin + mouse.y*0.10*bulbAmt;

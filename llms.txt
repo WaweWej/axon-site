@@ -4,9 +4,12 @@
 
 ## Bibliotek
 
+- [Byg din egen AI bogføringsassistent](https://axon-site-nu.vercel.app/library/byg-ai-bogfoeringsassistent.html): Du bygger en AI assistent, der tager et bilag, trækker beløb, dato og moms ud, foreslår den rigtige konto og lægger det klar i et regneark. Drejebogen tager dig fra tomt regneark til kørende værktøj på en eftermiddag, uden kode.
 - [ChatGPT vs Copilot vs Claude: hvad skal danske virksomheder vælge?](https://axon-site-nu.vercel.app/library/chatgpt-vs-copilot-vs-claude.html): En ærlig, opdateret sammenligning af de tre store AI assistenter, set med danske briller. Pris, datasikkerhed, dansk sprog og hvornår du vælger hvad.
 - [AI Politik på én side](https://axon-site-nu.vercel.app/library/ai-policy-one-page.html): En kort, letlæst skabelon til en intern AI politik. Sæt rammerne for, hvad der er i orden, og hvad der ikke er, uden et 40 siders dokument ingen læser.
 - [AI snydeark: 25 opgaver AI klarer for dig på minutter](https://axon-site-nu.vercel.app/library/ai-snydeark-kontoret.html): Ét printbart ark med 25 helt konkrete opgaver, du kan give en AI assistent i dag, med en færdig formulering til hver. Hæng det op ved skrivebordet.
+- [Byg en custom AI agent til teamet](https://axon-site-nu.vercel.app/library/byg-custom-ai-agent.html): En agent er en AI, der ikke bare svarer, men slår op i jeres egen viden og udfører handlinger. E-bogen tager dig fra idé til en kørende agent, der kender jeres dokumenter, med klare valg af værktøj og en plan for at holde den sikker.
+- [Automatiser kalender og mails med AI](https://axon-site-nu.vercel.app/library/automatiser-kalender-og-mail.html): AI kan sortere din indbakke, skrive udkast til svar i din egen tone og finde mødetider, så du sparer den daglige administration. E-bogen giver konkrete opskrifter til mail og kalender, du kan kopiere uden at være teknisk.
 - [Prompt Startpakke](https://axon-site-nu.vercel.app/library/prompt-starter-pack.html): 25 klar til brug prompts til de opgaver, teams bruger mest tid på. Kopiér, tilpas, og spar timer fra i dag.
 - [AI ordbog: 40 begreber forklaret på almindeligt dansk](https://axon-site-nu.vercel.app/library/ai-ordbog-paa-dansk.html): Fra prompt og token til RAG og hallucination. De 40 vigtigste AI begreber, forklaret kort og uden teknisk jargon, så hele teamet taler samme sprog.
 - [AI Arbejdsgangs Kit](https://axon-site-nu.vercel.app/library/workflow-audit-in-a-week.html): Den præcise femtrinsanalyse, vi kører i uge ét hos enhver kunde. Find, hvor arbejdet reelt går trægt, før du køber et eneste værktøj.
@@ -19,6 +22,7 @@
 
 ## Kategorier
 
+- E-bog: Byg din egen AI bogføringsassistent; Byg en custom AI agent til teamet; Automatiser kalender og mails med AI
 - Sammenligning: ChatGPT vs Copilot vs Claude: hvad skal danske virksomheder vælge?
 - Skabelon: AI Politik på én side; Prompt Startpakke; Scoringsskabelon til AI
 - Snydeark: AI snydeark: 25 opgaver AI klarer for dig på minutter

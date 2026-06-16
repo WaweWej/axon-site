@@ -29,7 +29,7 @@ const WEBSITE = { '@type':'WebSite', '@id':BASE_URL+'/#site', name:'Oplyst', url
 // map a document type to the most accurate schema.org type for richer GEO grounding
 const SCHEMA_TYPE = { Guide:'HowTo', Tjekliste:'HowTo', Drejebog:'HowTo', Playbook:'HowTo',
   Workshop:'HowTo', Skabelon:'CreativeWork', Beregner:'CreativeWork', Prompt:'CreativeWork',
-  Snydeark:'CreativeWork', Ordbog:'DefinedTermSet', Sammenligning:'Article' };
+  Snydeark:'CreativeWork', Ordbog:'DefinedTermSet', Sammenligning:'Article', 'E-bog':'HowTo' };
 
 /* ---- frontmatter ---- */
 function parse(raw){
@@ -183,7 +183,8 @@ const pagesLabel = n => n ? ` · ${n} ${n==1?'side':'sider'}` : '';
 // per document-type colour (rgb triplet), matching the main site's section palette
 const TYPE_RGB = { Guide:'91,140,255', Skabelon:'34,211,238', Tjekliste:'168,85,247',
   Drejebog:'245,158,11', Playbook:'245,158,11', Sammenligning:'244,86,156', Prompt:'45,212,191',
-  Snydeark:'250,204,21', Ordbog:'148,163,184', Beregner:'52,211,153', Workshop:'167,139,250' };
+  Snydeark:'250,204,21', Ordbog:'148,163,184', Beregner:'52,211,153', Workshop:'167,139,250',
+  'E-bog':'34,197,94' };
 const tcOf = p => TYPE_RGB[p.type] || '91,140,255';
 
 const getBtn = (p, label) => p.gated
