@@ -131,6 +131,16 @@
   .step-cta{pointer-events:auto;display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-family:var(--body);font-weight:600;font-size:16px;color:var(--accent);transition:gap .25s var(--ease);text-shadow:0 0 8px rgba(5,7,13,.7)}
   .step-cta:hover{gap:15px}
   .right .step-cta{justify-content:flex-end}
+  .step-list{display:flex;flex-direction:column;gap:9px;margin-top:26px;max-width:520px}
+  .right .step-list{margin-left:auto}
+  .step-item{pointer-events:auto;display:flex;align-items:center;gap:13px;padding:13px 16px;border:1px solid rgba(var(--tc,140,170,255),.32);border-radius:13px;
+    background:rgba(8,11,18,.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);color:var(--ink);font-size:15px;font-weight:500;line-height:1.25;transition:.25s var(--ease)}
+  .step-item:hover{border-color:rgba(var(--tc,140,170,255),.75);background:rgba(14,19,30,.7);transform:translateX(4px)}
+  .right .step-item:hover{transform:translateX(-4px)}
+  .si-type{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgb(var(--tc,91,140,255));
+    border:1px solid rgba(var(--tc,91,140,255),.4);border-radius:100px;padding:4px 9px;flex:none}
+  .si-go{margin-left:auto;color:rgb(var(--tc,91,140,255));flex:none;opacity:0;transform:translateX(-4px);transition:.25s var(--ease)}
+  .step-item:hover .si-go{opacity:1;transform:none}
   .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
   .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:7px 13px;border-radius:100px;border:1px solid rgba(255,255,255,.14);color:#c5cee4;background:rgba(5,7,13,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
   .right{margin-left:auto;text-align:right}
@@ -425,8 +435,12 @@
         <div class="num reveal">01 · Forstå</div>
         <h2 class="reveal">Forstå AI<br>fra bunden.</h2>
         <p class="reveal">Guider, snydeark og en ordbog, der forklarer AI i et sprog, danske ledere og medarbejdere faktisk kan bruge. Ingen buzzwords, ingen hype.</p>
-        <div class="tags reveal"><span class="tag">Guider</span><span class="tag">Snydeark</span><span class="tag">Ordbog</span></div>
-        <a class="step-cta reveal" href="library/">Se guiderne →</a>
+        <div class="step-list reveal">
+          <a class="step-item" href="library/workflow-audit-in-a-week.html" style="--tc:91,140,255"><span class="si-type">Guide</span>AI Arbejdsgangs Kit<span class="si-go">→</span></a>
+          <a class="step-item" href="library/ai-snydeark-kontoret.html" style="--tc:250,204,21"><span class="si-type">Snydeark</span>25 opgaver AI klarer for dig<span class="si-go">→</span></a>
+          <a class="step-item" href="library/ai-ordbog-paa-dansk.html" style="--tc:148,163,184"><span class="si-type">Ordbog</span>40 AI begreber på dansk<span class="si-go">→</span></a>
+        </div>
+        <a class="step-cta reveal" href="library/">Se alle guider →</a>
       </div>
     </section>
 
@@ -435,8 +449,12 @@
         <div class="num reveal">02 · Vælg</div>
         <h2 class="reveal">Vælg de rigtige<br>værktøjer.</h2>
         <p class="reveal">Sammenligninger, tjeklister og beregnere, så I træffer beslutningen på data i stedet for mavefornemmelse. Det vi selv ville have ønsket os, da vi startede.</p>
-        <div class="tags reveal"><span class="tag">Sammenligninger</span><span class="tag">Tjeklister</span><span class="tag">Beregnere</span></div>
-        <a class="step-cta reveal" href="library/">Se sammenligningerne →</a>
+        <div class="step-list reveal">
+          <a class="step-item" href="library/chatgpt-vs-copilot-vs-claude.html" style="--tc:244,86,156"><span class="si-type">Sammenligning</span>ChatGPT vs Copilot vs Claude<span class="si-go">→</span></a>
+          <a class="step-item" href="library/why-ai-pilots-stall.html" style="--tc:168,85,247"><span class="si-type">Tjekliste</span>Fra pilot til drift<span class="si-go">→</span></a>
+          <a class="step-item" href="library/ai-business-case-beregner.html" style="--tc:52,211,153"><span class="si-type">Beregner</span>AI business case beregner<span class="si-go">→</span></a>
+        </div>
+        <a class="step-cta reveal" href="library/">Se alle sammenligninger →</a>
       </div>
     </section>
 
@@ -445,8 +463,12 @@
         <div class="num reveal">03 · Brug</div>
         <h2 class="reveal">Kom i gang<br>i dag.</h2>
         <p class="reveal">Et promptbibliotek, klar til brug skabeloner og playbooks, I kan kopiere og tilpasse med det samme. Fra blankt felt til færdigt på minutter.</p>
-        <div class="tags reveal"><span class="tag">Promptbibliotek</span><span class="tag">Skabeloner</span><span class="tag">Playbooks</span></div>
-        <a class="step-cta reveal" href="library/">Se skabelonerne →</a>
+        <div class="step-list reveal">
+          <a class="step-item" href="library/promptbibliotek-efter-rolle.html" style="--tc:45,212,191"><span class="si-type">Prompt</span>Promptbibliotek: 50 prompts<span class="si-go">→</span></a>
+          <a class="step-item" href="library/first-ai-use-case-scoring.html" style="--tc:34,211,238"><span class="si-type">Skabelon</span>Scoringsskabelon til AI<span class="si-go">→</span></a>
+          <a class="step-item" href="library/ai-fluency-is-a-people-problem.html" style="--tc:245,158,11"><span class="si-type">Drejebog</span>Drejebog til AI fortrolighed<span class="si-go">→</span></a>
+        </div>
+        <a class="step-cta reveal" href="library/">Se alle skabeloner →</a>
       </div>
     </section>
 
@@ -455,8 +477,12 @@
         <div class="num reveal">04 · Forankr</div>
         <h2 class="reveal">Få AI ind<br>i teamet.</h2>
         <p class="reveal">Workshopkits med agenda, øvelser og slides, jeres team selv kan køre. Sådan bliver AI til en fælles vane, ikke et soloprojekt på en enkelt skrivebord.</p>
-        <div class="tags reveal"><span class="tag">Workshops</span><span class="tag">Agendaer</span><span class="tag">Øvelser</span></div>
-        <a class="step-cta reveal" href="library/">Se workshops →</a>
+        <div class="step-list reveal">
+          <a class="step-item" href="library/ai-kickstart-workshop.html" style="--tc:167,139,250"><span class="si-type">Workshop</span>AI kickstart kit (90 min)<span class="si-go">→</span></a>
+          <a class="step-item" href="library/ai-policy-one-page.html" style="--tc:34,211,238"><span class="si-type">Skabelon</span>AI Politik på én side<span class="si-go">→</span></a>
+          <a class="step-item" href="library/why-ai-pilots-stall.html" style="--tc:168,85,247"><span class="si-type">Tjekliste</span>Fra pilot til drift<span class="si-go">→</span></a>
+        </div>
+        <a class="step-cta reveal" href="library/">Se alle workshops →</a>
       </div>
     </section>
 
