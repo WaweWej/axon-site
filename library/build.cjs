@@ -10,6 +10,27 @@ const toHtml = s => { const fn = mk.marked || mk; return (typeof fn === 'functio
 const SITE = '../index.html';
 const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
+/* ---- SEO / GEO config ----
+   Set BASE_URL to the live origin (no trailing slash). Change this one line when the
+   real domain is connected (e.g. https://oplyst.dk). Everything below derives from it. */
+const BASE_URL = 'https://wawewej.github.io/axon-site';
+const HOME_URL = BASE_URL + '/';
+const LIB_URL  = BASE_URL + '/library/';
+const absLib   = rel => LIB_URL + String(rel).replace(/^\.?\//,'');           // a file inside /library/
+const ldJson   = obj => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g,'\\u003c')}</script>`;
+const isoDate  = s => { const d = new Date(s); return isNaN(d) ? undefined : d.toISOString().slice(0,10); };
+
+const ORG = { '@type':'Organization', '@id':BASE_URL+'/#org', name:'Oplyst',
+  url:HOME_URL, description:'Danmarks gratis AI vidensbank for ledere og medarbejdere.',
+  slogan:'Folkeoplysning for AI-alderen' };
+const WEBSITE = { '@type':'WebSite', '@id':BASE_URL+'/#site', name:'Oplyst', url:HOME_URL,
+  inLanguage:'da-DK', publisher:{ '@id':BASE_URL+'/#org' } };
+
+// map a document type to the most accurate schema.org type for richer GEO grounding
+const SCHEMA_TYPE = { Guide:'HowTo', Tjekliste:'HowTo', Drejebog:'HowTo', Playbook:'HowTo',
+  Workshop:'HowTo', Skabelon:'CreativeWork', Beregner:'CreativeWork', Prompt:'CreativeWork',
+  Snydeark:'CreativeWork', Ordbog:'DefinedTermSet', Sammenligning:'Article' };
+
 /* ---- frontmatter ---- */
 function parse(raw){
   const m = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
@@ -47,7 +68,7 @@ function makePdf(title, sub){
 }
 
 /* ---- shared chrome ---- */
-const head = (title, desc, og, bodyClass, bodyAttr) => `<!DOCTYPE html>
+const head = (title, desc, og, bodyClass, bodyAttr, extraHead) => `<!DOCTYPE html>
 <html lang="da">
 <head>
 <meta charset="UTF-8">
@@ -59,7 +80,9 @@ const head = (title, desc, og, bodyClass, bodyAttr) => `<!DOCTYPE html>
 <meta property="og:type" content="${og || 'website'}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="Oplyst">
+<meta property="og:locale" content="da_DK">
+<meta name="twitter:card" content="summary_large_image">${extraHead || ''}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23818cf8'/%3E%3Cstop offset='1' stop-color='%23fbbf24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Cpath d='M19 21 C20.6 19.8 22.5 18.1 22.5 13.3 C22.5 9 19.6 5.9 16 5.9 C12.4 5.9 9.5 9 9.5 13.3 C9.5 18.1 11.4 19.8 13 21 Z' fill='none' stroke='url(%23g)' stroke-width='1.7'/%3E%3Cpath d='M13.4 22.6 h5.2 M14.4 25 h3.2' stroke='url(%23g)' stroke-width='1.6' stroke-linecap='round'/%3E%3Ctext x='16' y='15' text-anchor='middle' font-family='monospace' font-size='7.5' font-weight='700' fill='url(%23g)'%3E10%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,7 +194,7 @@ const posts = fs.readdirSync(POSTS).filter(f => f.endsWith('.md')).map(f => {
     pages: data.pages || 0, level: data.level || 'Alle niveauer',
     file: data.file || ('files/' + slug + '.pdf'), gated: data.gated !== false,
     featured: !!data.featured, date: data.date || '', dateLabel: fmtDate(data.date),
-    html: toHtml(body)
+    tldr: data.tldr || '', html: toHtml(body)
   };
 }).sort((a,b) => new Date(b.date) - new Date(a.date));
 
@@ -188,8 +211,16 @@ const rest = posts.filter(p => p !== feat);
 const filterBtns = ['all', ...types].map((c,i) =>
   `<button class="filter${i===0?' on':''}" data-filter="${esc(c)}">${i===0?'Alle ressourcer':esc(c)}</button>`).join('');
 
+const hubLd = ldJson({ '@context':'https://schema.org', '@graph':[ ORG, WEBSITE,
+  { '@type':'CollectionPage', '@id':LIB_URL+'#page', url:LIB_URL, name:'Oplyst Bibliotek',
+    inLanguage:'da-DK', isPartOf:{'@id':BASE_URL+'/#site'},
+    about:'Gratis AI guider, skabeloner og værktøjer på dansk',
+    mainEntity:{ '@type':'ItemList', numberOfItems:posts.length,
+      itemListElement: posts.map((p,i)=>({ '@type':'ListItem', position:i+1, url:absLib(p.slug+'.html'), name:p.title })) } } ]});
+const hubExtra = `\n<link rel="canonical" href="${LIB_URL}">\n<meta property="og:url" content="${LIB_URL}">\n${hubLd}`;
 const hub = head('Oplyst Bibliotek · gratis AI guider, skabeloner og værktøjer',
-  'Gennemarbejdede guider, skabeloner og drejebøger til at få AI i arbejde. Kortlægning af arbejdsgange, tjeklister til drift og forankring i teamet, fra Oplyst.') +
+  'Gennemarbejdede guider, skabeloner og drejebøger til at få AI i arbejde. Kortlægning af arbejdsgange, tjeklister til drift og forankring i teamet, fra Oplyst.',
+  'website', '', '', hubExtra) +
 header + `
 <main>
   <div class="frame hub-head">
@@ -217,9 +248,27 @@ header + `
 fs.writeFileSync(path.join(DIR, 'index.html'), hub);
 
 /* ---- resource landing pages ---- */
+function resLd(p){
+  const url = absLib(p.slug + '.html');
+  const main = { '@type': SCHEMA_TYPE[p.type] || 'Article', '@id':url+'#res',
+    name:p.title, headline:p.title, description:p.summary, url, inLanguage:'da-DK',
+    datePublished:isoDate(p.date), dateModified:isoDate(p.date),
+    author:{'@id':BASE_URL+'/#org'}, publisher:{'@id':BASE_URL+'/#org'}, isPartOf:{'@id':BASE_URL+'/#site'},
+    learningResourceType:p.type, educationalLevel:p.level, isAccessibleForFree:true,
+    keywords:['AI','kunstig intelligens',p.type,'dansk'].join(', '), abstract:(p.tldr||p.summary) };
+  const crumbs = { '@type':'BreadcrumbList', itemListElement:[
+    {'@type':'ListItem',position:1,name:'Forsiden',item:HOME_URL},
+    {'@type':'ListItem',position:2,name:'Bibliotek',item:LIB_URL},
+    {'@type':'ListItem',position:3,name:p.title,item:url} ] };
+  return ldJson({ '@context':'https://schema.org', '@graph':[ main, crumbs, ORG ] });
+}
 for (const p of posts){
   const related = posts.filter(x => x !== p).slice(0, 3);
-  const page = head(p.title + ' · Oplyst Bibliotek', p.summary, 'article', 'reading', ` data-doctype="${esc(p.type)}"`) + `
+  const url = absLib(p.slug + '.html');
+  const resExtra = `\n<link rel="canonical" href="${url}">\n<meta property="og:url" content="${url}">\n`
+    + (isoDate(p.date) ? `<meta property="article:published_time" content="${isoDate(p.date)}">\n` : '')
+    + `<meta property="article:section" content="${esc(p.type)}">\n` + resLd(p);
+  const page = head(p.title + ' · Oplyst Bibliotek', p.summary, 'article', 'reading', ` data-doctype="${esc(p.type)}"`, resExtra) + `
 <div class="read-progress" aria-hidden="true"></div>` + header + `
 <article>
   <div class="res-head frame">
@@ -232,6 +281,10 @@ for (const p of posts){
     </div>
     <div class="res-cover rv"><span class="badge">${esc(p.type)}</span><span class="res-format">${esc(p.format)}</span></div>
   </div>
+  <aside class="tldr rv" aria-label="Kort fortalt">
+    <span class="tldr-k">Kort fortalt</span>
+    <p>${esc(p.tldr || p.summary)}</p>
+  </aside>
   <div class="prose">
     ${p.html}
   </div>
@@ -246,5 +299,43 @@ for (const p of posts){
   fs.writeFileSync(path.join(DIR, p.slug + '.html'), page);
 }
 
+/* ---- SEO / GEO site files (written to the site root, one level above /library) ---- */
+const ROOT = path.join(DIR, '..');
+const lastBuild = posts.map(p => isoDate(p.date)).filter(Boolean).sort().pop();
+
+const smUrls = [ {loc:HOME_URL, pri:'1.0', lastmod:lastBuild}, {loc:LIB_URL, pri:'0.9', lastmod:lastBuild},
+  ...posts.map(p => ({ loc:absLib(p.slug+'.html'), pri:'0.7', lastmod:isoDate(p.date) })) ];
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
+  + smUrls.map(u => `  <url><loc>${u.loc}</loc>${u.lastmod?`<lastmod>${u.lastmod}</lastmod>`:''}<priority>${u.pri}</priority></url>`).join('\n')
+  + `\n</urlset>\n`;
+fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap);
+
+const aiBots = ['GPTBot','OAI-SearchBot','ChatGPT-User','ClaudeBot','Claude-Web','anthropic-ai',
+  'PerplexityBot','Perplexity-User','Google-Extended','Applebot-Extended','CCBot','Bytespider','Amazonbot'];
+const robots = `# Oplyst — a free public knowledge bank. Crawlers and answer engines are welcome.\n`
+  + `User-agent: *\nAllow: /\n\n`
+  + `# AI / answer engines, named explicitly so they index and cite the library\n`
+  + aiBots.map(b => `User-agent: ${b}\nAllow: /`).join('\n')
+  + `\n\nSitemap: ${BASE_URL}/sitemap.xml\n`;
+fs.writeFileSync(path.join(ROOT, 'robots.txt'), robots);
+
+// /llms.txt — the emerging convention that hands LLMs a clean, curated map of the site
+const byType = {};
+posts.forEach(p => { (byType[p.type] = byType[p.type] || []).push(p); });
+const llms = `# Oplyst\n\n`
+  + `> Danmarks gratis AI vidensbank. Folkeoplysning for AI-alderen: gratis guider, skabeloner, tjeklister, `
+  + `promptbiblioteker og værktøjer, der hjælper danske ledere og medarbejdere med at få kunstig intelligens i arbejde. `
+  + `Alt indhold er gratis, på dansk og uden reklamer.\n\n`
+  + `## Bibliotek\n\n`
+  + posts.map(p => `- [${p.title}](${absLib(p.slug+'.html')}): ${(p.tldr||p.summary)}`).join('\n')
+  + `\n\n## Kategorier\n\n`
+  + Object.keys(byType).map(t => `- ${t}: ${byType[t].map(p=>p.title).join('; ')}`).join('\n')
+  + `\n\n## Om Oplyst\n\n`
+  + `- Forside: ${HOME_URL}\n- Bibliotek: ${LIB_URL}\n`
+  + `- Oplyst er skrevet af folk, der bygger AI i praksis, ikke sælger kurser. `
+  + `Indholdet er gratis at hente; valgfrie donationer via MobilePay holder det kørende.\n`;
+fs.writeFileSync(path.join(ROOT, 'llms.txt'), llms);
+
 console.log('Built ' + posts.length + ' resource(s) + index.html → ' + DIR);
+console.log('Wrote sitemap.xml, robots.txt, llms.txt → ' + ROOT);
 posts.forEach(p => console.log('  • ' + p.slug + '.html  [' + p.type + ']  ' + p.file));
