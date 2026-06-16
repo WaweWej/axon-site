@@ -209,12 +209,28 @@
     submit.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); submitGet(); }});
     emailEl.addEventListener('keydown',e=>{ if(e.key==='Enter') submitGet(); });
     addEventListener('keydown',e=>{ if(e.key==='Escape'&&gm.classList.contains('open')) closeGet(); });
-    // donation prompt after download (MobilePay)
-    const gmDonate=document.getElementById('gm-donate');
-    const MOBILEPAY_LINK=''; // paste your MobilePay box link to go live
-    if (gmDonate) gmDonate.addEventListener('click', ()=>{ if (MOBILEPAY_LINK){ window.open(MOBILEPAY_LINK,'_blank','noopener'); }
-      else { const t=gmDonate.textContent; gmDonate.textContent='Tilføj MobilePay link i koden'; setTimeout(()=>gmDonate.textContent=t,2000); } });
   }
+
+  /* ============ donation (MobilePay swipe + QR), tied to the download flow ============ */
+  // CONFIG: paste your MobilePay box link to go live. Use {AMOUNT} if your link takes an amount,
+  // e.g. 'https://qr.mobilepay.dk/box/XXXXXX' or 'mobilepay://send?phone=XXXXXX&amount={AMOUNT}&comment=Stoet'
+  const MOBILEPAY_LINK='';
+  function wireDonate(scope){
+    if(!scope) return;
+    let amt='50';
+    const chips=[...scope.querySelectorAll('.don-amt')], go=scope.querySelector('.don-go'),
+          qr=scope.querySelector('.don-qr'), qimg=scope.querySelector('.don-qr-img');
+    const url=()=>MOBILEPAY_LINK.replace('{AMOUNT}',amt);
+    function refresh(){ if(!qr||!qimg) return;
+      if(MOBILEPAY_LINK){ qimg.src='https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=6&data='+encodeURIComponent(url()); qr.hidden=false; }
+      else qr.hidden=true; }
+    chips.forEach(b=>b.addEventListener('click',()=>{ chips.forEach(x=>x.classList.toggle('on',x===b)); amt=b.dataset.amt; refresh(); }));
+    if(go) go.addEventListener('click',()=>{ if(MOBILEPAY_LINK){ window.open(url(),'_blank','noopener'); }
+      else { const t=go.textContent; go.textContent='Tilføj MobilePay link i koden'; setTimeout(()=>go.textContent=t,2000); } });
+    refresh();
+  }
+  wireDonate(document.getElementById('gm-donate-block'));
+  document.querySelectorAll('.donate-band').forEach(wireDonate);
 
   /* ============ mobile menu ============ */
   const menuBtn = document.getElementById('menuBtn'), mobileMenu = document.getElementById('mobileMenu');

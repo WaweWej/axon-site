@@ -304,5 +304,26 @@ footer.site .copy{font-family:var(--mono);font-size:12px;letter-spacing:.05em;co
 
 /* donation prompt in download success */
 .gm-donate{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
-.gm-donate p{color:var(--ink-mid);font-size:14px;line-height:1.5;margin-bottom:14px}
-.gm-donate .btn{width:100%;justify-content:center;margin-top:0}
+.gm-donate .don-head p{color:var(--ink-mid);font-size:14px;line-height:1.5;margin-top:6px}
+.gm-donate .don-pay .btn{width:100%;justify-content:center;margin-top:0}
+
+/* ---- shared donation widget (swipe + QR + amount chips) ---- */
+.don-k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.don-amts{display:flex;gap:8px;margin:14px 0}
+.don-amt{flex:1;font-family:var(--mono);font-size:14px;color:var(--ink-mid);padding:10px 0;border:1px solid var(--line);
+  border-radius:11px;background:rgba(255,255,255,.02);cursor:pointer;transition:.2s}
+.don-amt:hover{border-color:var(--accent);color:var(--ink)}
+.don-amt.on{border-color:var(--accent);color:var(--ink);background:rgba(99,102,241,.16);box-shadow:0 0 0 1px var(--accent) inset}
+.don-pay{display:flex;align-items:center;gap:16px}
+.don-qr{display:flex;flex-direction:column;align-items:center;gap:5px;flex:none}
+.don-qr img{border-radius:9px;background:#fff;padding:6px;display:block}
+.don-qr span{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-soft)}
+
+/* bottom-of-resource donation band */
+.donate-band{max-width:var(--readw);margin:40px auto 0;padding:26px 28px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;
+  border:1px solid rgba(99,102,241,.32);border-radius:18px;background:linear-gradient(120deg,rgba(99,102,241,.08),rgba(167,139,250,.03))}
+.donate-band .db-text h3{font-family:var(--display);font-weight:600;font-size:clamp(20px,2vw,25px);margin-top:6px;color:var(--ink)}
+.donate-band .db-text p{margin-top:8px;color:var(--ink-mid);font-size:14.5px;line-height:1.55}
+.donate-band .don-amts{margin-top:0}
+.donate-band .don-pay .btn{white-space:nowrap}
+@media(max-width:760px){.donate-band{grid-template-columns:1fr;margin-inline:22px;padding:22px}.don-pay{flex-wrap:wrap}}
