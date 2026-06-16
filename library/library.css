@@ -327,3 +327,11 @@ footer.site .copy{font-family:var(--mono);font-size:12px;letter-spacing:.05em;co
 .donate-band .don-amts{margin-top:0}
 .donate-band .don-pay .btn{white-space:nowrap}
 @media(max-width:760px){.donate-band{grid-template-columns:1fr;margin-inline:22px;padding:22px}.don-pay{flex-wrap:wrap}}
+
+/* optional donation inside the download form (pay-what-you-want at checkout) */
+.gm-tip{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.gm-tip-head{font-size:13px;line-height:1.5;color:var(--ink-soft)}
+.gm-tip .don-amts{margin:12px 0 10px}
+.gm-tip .don-amt{padding:8px 0;font-size:13px}
+.btn-ghost,.gm-tip .don-go{background:transparent;border:1px solid var(--line);color:var(--ink);box-shadow:none}
+.btn-ghost:hover,.gm-tip .don-go:hover{background:rgba(255,255,255,.05);border-color:var(--accent)}

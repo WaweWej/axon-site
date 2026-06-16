@@ -229,6 +229,7 @@
       else { const t=go.textContent; go.textContent='Tilføj MobilePay link i koden'; setTimeout(()=>go.textContent=t,2000); } });
     refresh();
   }
+  wireDonate(document.getElementById('gm-donate-form'));
   wireDonate(document.getElementById('gm-donate-block'));
   document.querySelectorAll('.donate-band').forEach(wireDonate);
 
