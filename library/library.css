@@ -330,6 +330,7 @@ footer.site .copy{font-family:var(--mono);font-size:12px;letter-spacing:.05em;co
 
 /* optional donation inside the download form (pay-what-you-want at checkout) */
 .gm-tip{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+#gm-form #gm-submit{margin-top:18px;width:100%;justify-content:center}
 .gm-tip-head{font-size:13px;line-height:1.5;color:var(--ink-soft)}
 .gm-tip .don-amts{margin:12px 0 10px}
 .gm-tip .don-amt{padding:8px 0;font-size:13px}
