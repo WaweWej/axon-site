@@ -1,0 +1,11 @@
+{
+  "name": "axon-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AXON — generative WebGL site for an AI consultancy + downloadable resource library",
+  "scripts": {
+    "start": "node server.cjs",
+    "build:library": "node library/build.cjs"
+  },
+  "license": "UNLICENSED"
+}
