@@ -13,7 +13,7 @@ const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'
 /* ---- SEO / GEO config ----
    Set BASE_URL to the live origin (no trailing slash). Change this one line when the
    real domain is connected (e.g. https://oplyst.dk). Everything below derives from it. */
-const BASE_URL = 'https://wawewej.github.io/axon-site';
+const BASE_URL = 'https://axon-site-nu.vercel.app';
 const HOME_URL = BASE_URL + '/';
 const LIB_URL  = BASE_URL + '/library/';
 const absLib   = rel => LIB_URL + String(rel).replace(/^\.?\//,'');           // a file inside /library/
