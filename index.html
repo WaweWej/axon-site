@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AXON · AI woven into how your business works</title>
-<meta name="description" content="AXON is an AI consultancy that audits your workflows, deploys AI systems that fit, and makes your people fluent, turning AI from hype into operating advantage.">
+<title>AXON · AI i drift. Brugt af jeres team.</title>
+<meta name="description" content="AXON er et dansk AI hus. Vi kortlægger jeres arbejdsgange, bygger AI systemer i drift og gør teamet selvkørende. AI som driftsfordel, ikke som hyldevarer.">
 <meta name="theme-color" content="#05070d">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AXON · AI woven into how your business works">
-<meta property="og:description" content="We audit your workflows, deploy AI systems that fit, and make your people fluent. AI as operating advantage, not hype.">
+<meta property="og:title" content="AXON · AI i drift. Brugt af jeres team.">
+<meta property="og:description" content="Vi kortlægger jeres arbejdsgange, bygger AI systemer i drift og gør teamet selvkørende. AI som driftsfordel, ikke hype.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AXON · AI woven into how your business works">
-<meta name="twitter:description" content="We audit your workflows, deploy AI systems that fit, and make your people fluent.">
+<meta name="twitter:title" content="AXON · AI i drift. Brugt af jeres team.">
+<meta name="twitter:description" content="Vi kortlægger jeres arbejdsgange, bygger AI systemer i drift og gør teamet selvkørende.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%235b8cff'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%239b6bff' stroke-width='1.4' opacity='.65'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,6 +125,9 @@
   .step .num::after{content:"";height:1px;width:60px;background:var(--line)}
   .step h2{font-family:var(--display);font-weight:600;font-size:clamp(33px,5vw,64px);line-height:1.0;letter-spacing:-.025em;text-shadow:0 0 4px rgba(5,7,13,.85),0 1px 2px rgba(5,7,13,.92)}
   .step p{margin-top:20px;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#c5cee4;text-shadow:0 0 3px rgba(5,7,13,.95),0 0 9px rgba(5,7,13,.82),0 1px 1px rgba(5,7,13,1)}
+  .when{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink);border:1px solid var(--line);border-radius:100px;padding:4px 11px;background:rgba(255,255,255,.03)}
+  .step .result{margin-top:20px;font-size:clamp(14px,1.2vw,16px);line-height:1.5;color:#c5cee4;text-shadow:0 0 6px rgba(5,7,13,.85)}
+  .step .result b{color:var(--accent);font-weight:600}
   .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
   .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:7px 13px;border-radius:100px;border:1px solid rgba(255,255,255,.14);color:#c5cee4;background:rgba(5,7,13,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
   .right{margin-left:auto;text-align:right}
@@ -335,7 +338,7 @@
   <div class="loader" id="loader">
     <div class="loader-brand">AXON</div>
     <div class="loader-bar"><i></i></div>
-    <div class="loader-sub">Initializing</div>
+    <div class="loader-sub">Indlæser</div>
   </div>
 
   <canvas id="gl" aria-hidden="true"></canvas>
@@ -350,121 +353,124 @@
   <header>
     <div class="brand"><span class="dot"></span>AXON</div>
     <nav class="links">
-      <a href="#audit">Approach</a>
-      <a href="#deploy">Systems</a>
-      <a href="#upskill">Training</a>
-      <a href="library/">Library</a>
+      <a href="#audit">Tilbud</a>
+      <a href="#deploy">Systemer</a>
+      <a href="#upskill">Forankring</a>
+      <a href="library/">Bibliotek</a>
     </nav>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <button class="menu-btn" id="menuBtn" aria-label="Åbn menu" aria-expanded="false"><span></span><span></span></button>
   </header>
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <nav>
-      <a href="#audit" data-mclose><span class="mm-i">01</span>Approach</a>
-      <a href="#deploy" data-mclose><span class="mm-i">02</span>Systems</a>
-      <a href="#upskill" data-mclose><span class="mm-i">03</span>Training</a>
-      <a href="library/"><span class="mm-i">04</span>Library</a>
+      <a href="#audit" data-mclose><span class="mm-i">01</span>Tilbud</a>
+      <a href="#deploy" data-mclose><span class="mm-i">02</span>Systemer</a>
+      <a href="#upskill" data-mclose><span class="mm-i">03</span>Forankring</a>
+      <a href="library/"><span class="mm-i">04</span>Bibliotek</a>
     </nav>
-    <a href="#contact" class="btn btn-primary" data-wizard>Book your audit →</a>
+    <a href="#contact" class="btn btn-primary" data-wizard>Få en AI audit →</a>
   </div>
 
   <main>
     <section id="hero" data-formation="0" data-side="left">
       <div class="hero-wrap">
-        <div class="kicker reveal">AI Consultancy</div>
-        <h1 class="reveal">We wire AI into the way<br>your business <span class="grad">already works.</span></h1>
-        <p class="reveal">From workflow audits to deployed AI systems to teams who actually use them. We turn AI from hype into operating advantage.</p>
+        <div class="kicker reveal">Dansk AI hus</div>
+        <h1 class="reveal">AI bygget ind i måden,<br>I <span class="grad">allerede arbejder på.</span></h1>
+        <p class="reveal">Fra audit af jeres arbejdsgange til systemer i drift og et team, der selv kører videre. AI som driftsfordel, ikke som endnu et værktøj, ingen åbner.</p>
         <div class="cta-row reveal">
-          <a href="#contact" class="btn btn-primary" data-wizard>Start with a workflow audit →</a>
+          <a href="#contact" class="btn btn-primary" data-wizard>Få en AI audit →</a>
         </div>
       </div>
     </section>
 
     <section id="statement" class="statement" data-side="left">
       <div class="big">
-        <span class="reveal">Most teams <em>bought</em> AI.</span>
-        <span class="reveal">Almost none <em>operate</em> with it.</span>
+        <span class="reveal">De fleste <em>køber</em> AI.</span>
+        <span class="reveal">Næsten ingen <em>bruger</em> det.</span>
       </div>
     </section>
 
     <section id="audit" data-formation="1" data-side="left">
       <div class="step">
-        <div class="num reveal">01 · Audit</div>
-        <h2 class="reveal">We map how work<br>really flows.</h2>
-        <p class="reveal">Before a single tool, we trace your real workflows. The handoffs, the copy paste, the waiting. We find where AI creates leverage, and where it would just add noise.</p>
-        <div class="tags reveal"><span class="tag">Process mapping</span><span class="tag">Opportunity scan</span><span class="tag">ROI model</span></div>
+        <div class="num reveal">Tilbud 01 · AI audit <span class="when">2 uger</span></div>
+        <h2 class="reveal">Vi kortlægger, hvor<br>AI flytter mest.</h2>
+        <p class="reveal">På to uger følger vi jeres reelle arbejdsgange, finder de opgaver hvor AI giver mest, og regner på gevinsten. Ingen gætværk. Ingen hype.</p>
+        <div class="tags reveal"><span class="tag">Proceskortlægning</span><span class="tag">Prioriteret roadmap</span><span class="tag">Business case</span></div>
+        <p class="result reveal"><b>I får:</b> præcis hvor I starter, og hvad det er værd.</p>
       </div>
     </section>
 
     <section id="deploy" data-formation="2" data-side="right">
       <div class="step right">
-        <div class="num reveal">02 · Deploy</div>
-        <h2 class="reveal">We build AI systems<br>that fit.</h2>
-        <p class="reveal">Custom agents, automations and integrations wired into the tools you already use. Not a demo, but production systems your team relies on by Monday.</p>
-        <div class="tags reveal"><span class="tag">Agents</span><span class="tag">Automation</span><span class="tag">Integrations</span></div>
+        <div class="num reveal">Tilbud 02 · System i drift <span class="when">4 til 6 uger</span></div>
+        <h2 class="reveal">Vi bygger systemet,<br>der passer ind.</h2>
+        <p class="reveal">Vi udvikler ét AI system, bygget ind i de værktøjer I allerede bruger, og sætter det i drift. Ikke en demo. Et system jeres team kan stole på fra mandag.</p>
+        <div class="tags reveal"><span class="tag">Agenter & automatisering</span><span class="tag">Integration i jeres stak</span><span class="tag">Drift & overdragelse</span></div>
+        <p class="result reveal"><b>I får:</b> et system i produktion, ikke en prototype på en hylde.</p>
       </div>
     </section>
 
     <section id="upskill" data-formation="3" data-side="left">
       <div class="step">
-        <div class="num reveal">03 · Upskill</div>
-        <h2 class="reveal">We make your people<br>fluent.</h2>
-        <p class="reveal">Hands on training so the team owns it after we leave. Real tasks, real tools, real confidence. AI becomes how they work, not another thing to learn.</p>
-        <div class="tags reveal"><span class="tag">Workshops</span><span class="tag">Playbooks</span><span class="tag">Enablement</span></div>
+        <div class="num reveal">Tilbud 03 · Forankring <span class="when">løbende forløb</span></div>
+        <h2 class="reveal">Vi gør jeres folk<br>selvkørende.</h2>
+        <p class="reveal">Hands on træning på rigtige opgaver, så teamet selv ejer det, når vi går. AI bliver måden, de arbejder på, ikke endnu en ting at lære.</p>
+        <div class="tags reveal"><span class="tag">Workshops</span><span class="tag">Drejebøger</span><span class="tag">Interne ambassadører</span></div>
+        <p class="result reveal"><b>I får:</b> et team, der kører videre. Uden os.</p>
       </div>
     </section>
 
     <section id="contact" class="outro" data-formation="4" data-side="center">
-      <h2 class="reveal">Ready to operate with AI?</h2>
-      <p class="reveal">A 30 minute workflow audit. No slides, no jargon. Just where AI moves the needle for you.</p>
-      <div class="cta-row reveal" style="justify-content:center"><a href="#contact" class="btn btn-primary" data-wizard>Book your audit →</a></div>
+      <h2 class="reveal">Klar til at komme i gang?</h2>
+      <p class="reveal">En AI audit på 30 minutter. Ingen slides, ingen buzzwords. Bare hvor AI flytter nålen for jer. Svar inden én arbejdsdag. Uforpligtende.</p>
+      <div class="cta-row reveal" style="justify-content:center"><a href="#contact" class="btn btn-primary" data-wizard>Få en AI audit →</a></div>
     </section>
 
     <section id="gallery" class="gallery">
       <div class="gallery-head">
-        <div class="kicker reveal">The Library</div>
-        <h2 class="reveal">Free tools to put AI to work.</h2>
-        <p class="reveal">Playbooks, templates and checklists you can download and use today. The same kits we run with clients.</p>
+        <div class="kicker reveal">Biblioteket</div>
+        <h2 class="reveal">Gratis værktøjer, der får AI i arbejde.</h2>
+        <p class="reveal">Drejebøger, skabeloner og tjeklister, du kan hente og bruge i dag. De samme kits, vi kører med kunderne.</p>
       </div>
       <div class="float-field">
         <a class="float-card" href="library/workflow-audit-in-a-week.html" style="--i:0;--amp:26px;--rot:-2deg;--tc:91,140,255">
           <span class="fc-badge">Guide</span>
-          <h3>The AI Workflow Audit Kit</h3>
-          <p>Find the highest leverage place to start, in an afternoon.</p>
-          <span class="fc-go">Get the guide →</span>
+          <h3>AI Arbejdsgangs Kit</h3>
+          <p>Find på en eftermiddag det sted, hvor AI giver mest.</p>
+          <span class="fc-go">Hent guiden →</span>
         </a>
         <a class="float-card" href="library/first-ai-use-case-scoring.html" style="--i:1;--amp:18px;--rot:1.5deg;--tc:34,211,238">
-          <span class="fc-badge">Template</span>
-          <h3>AI Use Case Scoring Template</h3>
-          <p>Rank your AI ideas objectively, and pick the right one first.</p>
-          <span class="fc-go">Get the template →</span>
+          <span class="fc-badge">Skabelon</span>
+          <h3>Scoringsskabelon til AI</h3>
+          <p>Rangér jeres AI idéer objektivt, og vælg den rigtige først.</p>
+          <span class="fc-go">Hent skabelonen →</span>
         </a>
         <a class="float-card" href="library/why-ai-pilots-stall.html" style="--i:2;--amp:30px;--rot:2deg;--tc:168,85,247">
-          <span class="fc-badge">Checklist</span>
-          <h3>Pilot to Production</h3>
-          <p>24 checks that tell you if an AI pilot is ready for daily use.</p>
-          <span class="fc-go">Get the checklist →</span>
+          <span class="fc-badge">Tjekliste</span>
+          <h3>Fra pilot til drift</h3>
+          <p>24 punkter, der afslører, om en AI pilot er klar til drift.</p>
+          <span class="fc-go">Hent tjeklisten →</span>
         </a>
         <a class="float-card" href="library/prompt-starter-pack.html" style="--i:3;--amp:22px;--rot:-1.5deg;--tc:34,211,238">
-          <span class="fc-badge">Template</span>
-          <h3>The Prompt Starter Pack</h3>
-          <p>25 ready to use prompts that kill the blank page.</p>
-          <span class="fc-go">Get the pack →</span>
+          <span class="fc-badge">Skabelon</span>
+          <h3>Prompt Startpakke</h3>
+          <p>25 klar til brug prompts, der fjerner det blanke felt.</p>
+          <span class="fc-go">Hent pakken →</span>
         </a>
         <a class="float-card" href="library/ai-fluency-is-a-people-problem.html" style="--i:4;--amp:28px;--rot:2.5deg;--tc:245,158,11">
-          <span class="fc-badge">Playbook</span>
-          <h3>The AI Fluency Playbook</h3>
-          <p>Turn "we have AI" into "this is just how we work now".</p>
-          <span class="fc-go">Get the playbook →</span>
+          <span class="fc-badge">Drejebog</span>
+          <h3>Drejebog til AI fortrolighed</h3>
+          <p>Sådan gør I "vi har AI" til "sådan arbejder vi nu".</p>
+          <span class="fc-go">Hent drejebogen →</span>
         </a>
         <a class="float-card" href="library/ai-policy-one-page.html" style="--i:5;--amp:20px;--rot:-2deg;--tc:34,211,238">
-          <span class="fc-badge">Template</span>
-          <h3>AI Policy on One Page</h3>
-          <p>Set the rules for AI without a document no one reads.</p>
-          <span class="fc-go">Get the template →</span>
+          <span class="fc-badge">Skabelon</span>
+          <h3>AI Politik på én side</h3>
+          <p>Sæt rammerne for AI uden et dokument, ingen læser.</p>
+          <span class="fc-go">Hent skabelonen →</span>
         </a>
       </div>
-      <a class="gallery-all" href="library/">See the whole library →</a>
+      <a class="gallery-all" href="library/">Se hele biblioteket →</a>
     </section>
   </main>
 
@@ -472,29 +478,29 @@
     <div class="f-top">
       <div class="f-brandwrap">
         <div class="f-brand"><span class="dot"></span>AXON</div>
-        <p class="f-tag">AI woven into how your business already works. Audited, deployed, and owned by your team.</p>
+        <p class="f-tag">AI bygget ind i måden, I allerede arbejder på. Kortlagt, sat i drift og ejet af jeres eget team.</p>
       </div>
       <div class="f-cols">
         <div class="f-col">
-          <h4>Approach</h4>
-          <a href="#audit">Audit</a>
-          <a href="#deploy">Deploy</a>
-          <a href="#upskill">Upskill</a>
+          <h4>Tilbud</h4>
+          <a href="#audit">AI audit</a>
+          <a href="#deploy">System i drift</a>
+          <a href="#upskill">Forankring</a>
         </div>
         <div class="f-col">
-          <h4>Resources</h4>
-          <a href="library/">Library</a>
-          <a href="library/">Guides &amp; templates</a>
+          <h4>Ressourcer</h4>
+          <a href="library/">Bibliotek</a>
+          <a href="library/">Guider &amp; skabeloner</a>
         </div>
         <div class="f-col">
-          <h4>Get started</h4>
-          <a href="#contact" data-wizard>Book your audit</a>
+          <h4>Kom i gang</h4>
+          <a href="#contact" data-wizard>Få en AI audit</a>
         </div>
       </div>
     </div>
     <div class="f-bot">
-      <span>© AXON · AI as operating advantage.</span>
-      <span>Built for teams who want to operate, not experiment.</span>
+      <span>© AXON · AI som driftsfordel.</span>
+      <span>Bygget til teams, der vil i drift, ikke bare eksperimentere.</span>
     </div>
   </footer>
 
@@ -504,74 +510,74 @@
     <div class="wizard-inner">
       <div class="wizard-top">
         <div class="wizard-count"><b id="wnum">01</b> / 04</div>
-        <button class="wizard-close" data-wclose type="button">Close</button>
+        <button class="wizard-close" data-wclose type="button">Luk</button>
       </div>
       <div class="wizard-track"><i id="wfill"></i></div>
 
       <div class="wizard-steps" id="wsteps">
         <div class="wstep active" data-key="challenge">
-          <div class="q-kicker">Where it hurts</div>
-          <h3>What's the biggest drag on your team right now?</h3>
+          <div class="q-kicker">Hvor det gør ondt</div>
+          <h3>Hvad tynger jeres team mest lige nu?</h3>
           <div class="opts">
-            <button class="opt" type="button" data-val="Manual, repetitive work"><span class="dot"></span>Too much manual, repetitive work</button>
-            <button class="opt" type="button" data-val="Slow processes and handoffs"><span class="dot"></span>Slow processes and handoffs</button>
-            <button class="opt" type="button" data-val="Tools unused"><span class="dot"></span>We have AI tools, but no one uses them</button>
-            <button class="opt" type="button" data-val="Unsure where AI fits"><span class="dot"></span>We don't know where AI fits</button>
+            <button class="opt" type="button" data-val="Manuelt, gentaget arbejde"><span class="dot"></span>For meget manuelt, gentaget arbejde</button>
+            <button class="opt" type="button" data-val="Langsomme processer og overleveringer"><span class="dot"></span>Langsomme processer og overleveringer</button>
+            <button class="opt" type="button" data-val="Værktøjer bruges ikke"><span class="dot"></span>Vi har AI værktøjer, men ingen bruger dem</button>
+            <button class="opt" type="button" data-val="Ved ikke hvor AI passer ind"><span class="dot"></span>Vi ved ikke, hvor AI passer ind</button>
           </div>
         </div>
 
         <div class="wstep" data-key="team">
-          <div class="q-kicker">Scale</div>
-          <h3>How big is the team you'd roll this out to?</h3>
+          <div class="q-kicker">Størrelse</div>
+          <h3>Hvor stort er det team, I vil rulle det ud til?</h3>
           <div class="opts">
-            <button class="opt" type="button" data-val="Solo / founders"><span class="dot"></span>Just me / founders</button>
-            <button class="opt" type="button" data-val="2 to 10"><span class="dot"></span>2 to 10 people</button>
-            <button class="opt" type="button" data-val="11 to 50"><span class="dot"></span>11 to 50 people</button>
-            <button class="opt" type="button" data-val="50+"><span class="dot"></span>50+ people</button>
+            <button class="opt" type="button" data-val="Kun mig / stifterne"><span class="dot"></span>Kun mig / stifterne</button>
+            <button class="opt" type="button" data-val="2 til 10"><span class="dot"></span>2 til 10 personer</button>
+            <button class="opt" type="button" data-val="11 til 50"><span class="dot"></span>11 til 50 personer</button>
+            <button class="opt" type="button" data-val="50+"><span class="dot"></span>50+ personer</button>
           </div>
         </div>
 
         <div class="wstep" data-key="stage">
-          <div class="q-kicker">Starting point</div>
-          <h3>Where are you with AI today?</h3>
+          <div class="q-kicker">Udgangspunkt</div>
+          <h3>Hvor er I med AI i dag?</h3>
           <div class="opts">
-            <button class="opt" type="button" data-val="Not started"><span class="dot"></span>Haven't really started</button>
-            <button class="opt" type="button" data-val="Experimenting"><span class="dot"></span>Experimenting individually</button>
-            <button class="opt" type="button" data-val="A few tools in use"><span class="dot"></span>A few tools in real use</button>
-            <button class="opt" type="button" data-val="Scaling"><span class="dot"></span>Scaling it across the team</button>
+            <button class="opt" type="button" data-val="Ikke kommet i gang"><span class="dot"></span>Er ikke rigtig kommet i gang</button>
+            <button class="opt" type="button" data-val="Eksperimenterer"><span class="dot"></span>Eksperimenterer hver for sig</button>
+            <button class="opt" type="button" data-val="Enkelte værktøjer i brug"><span class="dot"></span>Enkelte værktøjer i reel brug</button>
+            <button class="opt" type="button" data-val="Skalerer"><span class="dot"></span>Skalerer det på tværs af teamet</button>
           </div>
         </div>
 
         <div class="wstep" data-key="contact">
-          <div class="q-kicker">Where to reach you</div>
-          <h3>Where should we send your audit plan?</h3>
+          <div class="q-kicker">Hvor vi fanger jer</div>
+          <h3>Hvor skal vi sende jeres analyseplan?</h3>
           <div class="fields">
-            <div class="field"><input id="w-name" type="text" placeholder="Your name" autocomplete="name"></div>
-            <div class="field"><input id="w-email" type="email" placeholder="Work email" autocomplete="email"></div>
-            <div class="field"><input id="w-company" type="text" placeholder="Company (optional)" autocomplete="organization"></div>
+            <div class="field"><input id="w-name" type="text" placeholder="Dit navn" autocomplete="name"></div>
+            <div class="field"><input id="w-email" type="email" placeholder="Arbejdsmail" autocomplete="email"></div>
+            <div class="field"><input id="w-company" type="text" placeholder="Virksomhed (valgfrit)" autocomplete="organization"></div>
           </div>
           <div class="werror" id="werror"></div>
         </div>
 
         <div class="wstep wdone" data-key="done">
-          <div class="q-kicker">Sent</div>
-          <h3>You're in.</h3>
-          <p class="wdone-p">We'll review your answers and reply within one business day. With exactly where AI moves the needle for you.</p>
+          <div class="q-kicker">Sendt</div>
+          <h3>Du er med.</h3>
+          <p class="wdone-p">Vi gennemgår dine svar og vender tilbage inden for én arbejdsdag. Med præcis hvor AI flytter nålen for jer.</p>
         </div>
       </div>
 
       <div class="wnav" id="wnav">
-        <button class="wback" id="wback" type="button">← Back</button>
-        <a class="btn btn-primary" id="wnext" role="button" tabindex="0">Continue →</a>
-        <a class="btn btn-primary" id="wsubmit" role="button" tabindex="0" style="display:none">Send it →</a>
+        <button class="wback" id="wback" type="button">← Tilbage</button>
+        <a class="btn btn-primary" id="wnext" role="button" tabindex="0">Videre →</a>
+        <a class="btn btn-primary" id="wsubmit" role="button" tabindex="0" style="display:none">Send →</a>
       </div>
     </div>
   </div>
 
   <div class="rail" id="rail"></div>
   <div class="hint" id="hint"><span class="bar"></span>Scroll</div>
-  <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound" aria-pressed="false">
-    <span class="eq"><i></i><i></i><i></i></span><span id="soundLabel">Sound</span>
+  <button class="sound-toggle" id="soundToggle" aria-label="Slå lyd til og fra" aria-pressed="false">
+    <span class="eq"><i></i><i></i><i></i></span><span id="soundLabel">Lyd</span>
   </button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -1042,7 +1048,7 @@
 
   function next(){
     const key = steps[idx].dataset.key;
-    if (['challenge','team','stage'].includes(key) && !answers[key]){ errEl.textContent = 'Pick one to continue.'; return; }
+    if (['challenge','team','stage'].includes(key) && !answers[key]){ errEl.textContent = 'Vælg én for at fortsætte.'; return; }
     show(idx + 1);
   }
   function back(){ if (idx > 0) show(idx - 1); }
@@ -1051,21 +1057,21 @@
     const name = document.getElementById('w-name').value.trim();
     const email = document.getElementById('w-email').value.trim();
     const company = document.getElementById('w-company').value.trim();
-    if (!name){ errEl.textContent = 'Your name, please.'; return; }
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errEl.textContent = 'A valid work email, please.'; return; }
+    if (!name){ errEl.textContent = 'Dit navn, tak.'; return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errEl.textContent = 'En gyldig arbejdsmail, tak.'; return; }
     Object.assign(answers, {name, email, company});
     submitBtn.style.pointerEvents = 'none';
     try {
       if (WEB3FORMS_KEY){
         const fd = new FormData();
         fd.append('access_key', WEB3FORMS_KEY);
-        fd.append('subject', 'New audit lead · ' + name + (company ? ' @ ' + company : ''));
+        fd.append('subject', 'Ny audit lead · ' + name + (company ? ' @ ' + company : ''));
         fd.append('from_name', 'AXON website');
         fd.append('replyto', email);
-        fd.append('Name', name); fd.append('Email', email); fd.append('Company', company || '(not provided)');
-        fd.append('Biggest challenge', answers.challenge || '(not provided)');
-        fd.append('Team size', answers.team || '(not provided)');
-        fd.append('AI stage', answers.stage || '(not provided)');
+        fd.append('Navn', name); fd.append('Mail', email); fd.append('Virksomhed', company || '(ikke oplyst)');
+        fd.append('Største udfordring', answers.challenge || '(ikke oplyst)');
+        fd.append('Teamstørrelse', answers.team || '(ikke oplyst)');
+        fd.append('AI niveau', answers.stage || '(ikke oplyst)');
         await fetch('https://api.web3forms.com/submit', {method:'POST', body:fd});
       } else {
         console.warn('[wizard] No WEB3FORMS_KEY set, lead captured locally, not emailed:', answers);
@@ -1241,9 +1247,9 @@
   }
   function enable(){ init(); if (ctx.resume) ctx.resume(); on = true; startAmbient();
     master.gain.cancelScheduledValues(ctx.currentTime); master.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.5);
-    toggle.classList.add('on'); toggle.setAttribute('aria-pressed','true'); label.textContent = 'Sound on'; }
+    toggle.classList.add('on'); toggle.setAttribute('aria-pressed','true'); label.textContent = 'Lyd til'; }
   function disable(){ on = false; if (master) master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
-    toggle.classList.remove('on'); toggle.setAttribute('aria-pressed','false'); label.textContent = 'Sound'; }
+    toggle.classList.remove('on'); toggle.setAttribute('aria-pressed','false'); label.textContent = 'Lyd'; }
   toggle.addEventListener('click', () => on ? disable() : enable());
 
   // hooks

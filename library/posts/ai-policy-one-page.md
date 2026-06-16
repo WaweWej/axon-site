@@ -1,26 +1,26 @@
 ---
-title: AI Policy on One Page
-type: Template
-summary: A short, readable template for an internal AI policy. Set the rules for what's fine and what isn't, without a 40 page document no one reads.
+title: AI Politik på én side
+type: Skabelon
+summary: En kort, letlæst skabelon til en intern AI politik. Sæt rammerne for, hvad der er i orden, og hvad der ikke er, uden et 40 siders dokument ingen læser.
 format: PDF
 pages: 2
-level: All levels
+level: Alle niveauer
 file: files/ai-policy-one-page.pdf
 gated: true
 date: 2026-06-15
 ---
 
-Most AI policies fail because they're too long to be read and too vague to be used. This template fits on one page, and people actually remember it.
+De fleste AI politikker fejler, fordi de er for lange til at blive læst og for vage til at bruge. Denne skabelon passer på én side, og folk husker den faktisk.
 
-## What's inside
+## Hvad er der i
 
-- **A fill in one page policy** with fields you tailor to your company
-- **Clear rules for data**: what must never be shared, and what's fine
-- **A green, amber, red list** of tasks, so the choice is easy in the moment
-- **A short note for managers** on how to roll it out without sounding like a warning
+- **En udfyldbar én siders politik** med felter, du tilpasser jeres virksomhed
+- **Klare regler for data**: hvad må aldrig deles, og hvad er fint
+- **En grøn, gul, rød liste** over opgaver, så valget er nemt i hverdagen
+- **En kort note til ledere** om, hvordan I ruller den ud uden at lyde som en advarsel
 
-## Who it's for
+## Hvem er den til
 
-Leaders and operations people who want to give the team freedom to use AI, but with clear guardrails, and without writing a whole handbook.
+Ledere og driftsansvarlige, der vil give teamet frihed til at bruge AI, men med tydelige rammer, og uden at skrive en hel håndbog.
 
-> The best policy is the one people can remember on Monday morning. Everything else is theatre.
+> Den bedste politik er den, folk kan huske mandag morgen. Alt andet er teater.

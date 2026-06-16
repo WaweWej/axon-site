@@ -1,26 +1,26 @@
 ---
-title: AI Use Case Scoring Template
-type: Template
-summary: A plug and play scoring sheet to rank your AI ideas objectively, so you pick a first project that builds momentum instead of a graveyard of experiments.
-format: Spreadsheet
+title: Scoringsskabelon til AI
+type: Skabelon
+summary: En klar til brug scoringsskabelon, der rangerer jeres AI idéer objektivt, så I vælger et første projekt, der skaber medvind i stedet for en kirkegård af forsøg.
+format: Regneark
 pages: 1
-level: All levels
+level: Alle niveauer
 file: files/first-ai-use-case-scoring.pdf
 gated: true
 date: 2026-06-03
 ---
 
-The first use case matters more than any after it. Get it right and you earn the trust and budget for the next five. This template makes the choice defensible instead of political.
+Den første use case betyder mere end nogen efter den. Rammer du rigtigt, optjener du tilliden og budgettet til de næste fem. Denne skabelon gør valget velbegrundet i stedet for politisk.
 
-## What's inside
+## Hvad er der i
 
-- **A ready to use scoring grid**: drop in your candidate use cases and rank them
-- **Five weighted factors**: pain, frequency, pattern, checkability, reach
-- **The formula** `(pain times frequency) plus pattern plus checkability plus reach`, pre built
-- **Three quick gut checks** (the Monday, screenshot and intern tests) to sanity test the winner
+- **Et klar til brug scoringsgitter**: skriv jeres kandidater ind, og rangér dem
+- **Fem vægtede faktorer**: smerte, hyppighed, mønster, kontrollerbarhed, rækkevidde
+- **Formlen** `(smerte gange hyppighed) plus mønster plus kontrollerbarhed plus rækkevidde`, færdigbygget
+- **Tre hurtige mavetjek** til at efterprøve vinderen
 
-## Who it's for
+## Hvem er den til
 
-Teams staring at a list of "things AI could maybe do" who need to choose one, without it turning into a debate about whose idea is best.
+Teams, der står med en liste over "ting AI måske kunne gøre", og som skal vælge én. Uden at det ender i en debat om, hvis idé der er bedst.
 
-> Your first use case should be boring, frequent, and easy to check. Save the ambitious one for when you've banked some trust.
+> Jeres første use case bør være kedelig, hyppig og let at kontrollere. Gem den ambitiøse, til I har sat tillid i banken.

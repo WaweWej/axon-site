@@ -21,8 +21,8 @@
     const world = new THREE.Group(); scene.add(world);
 
     // background light shifts by document type, using the main site's section palette
-    const PAL = { Guide:[0x5b8cff,0x9b6bff], Template:[0x22d3ee,0x4f8bff], Checklist:[0xa855f7,0x6b8cff],
-                  Playbook:[0xf59e0b,0x6aa0ff], Toolkit:[0xf4569c,0x7aa2ff], Tutorial:[0x2dd4bf,0x4cc9f0] };
+    const PAL = { Guide:[0x5b8cff,0x9b6bff], Skabelon:[0x22d3ee,0x4f8bff], Tjekliste:[0xa855f7,0x6b8cff],
+                  Drejebog:[0xf59e0b,0x6aa0ff], Toolkit:[0xf4569c,0x7aa2ff], Tutorial:[0x2dd4bf,0x4cc9f0] };
     const pair = PAL[document.body.dataset.doctype] || [0x5b8cff,0x9b6bff];
     const cA = new THREE.Color(pair[0]), cB = new THREE.Color(pair[1]), cMix = new THREE.Color().copy(cA).lerp(cB,.5);
     if (document.body.dataset.doctype){
@@ -176,8 +176,8 @@
     let current=null;
     const WEB3FORMS_KEY=''; // paste a Web3Forms key to email the leads (https://web3forms.com)
     const openGet=d=>{ current=d;
-      kickEl.textContent='Free '+((d.type||'resource').toLowerCase());
-      titleEl.textContent='Get “'+(d.title||'the download')+'”';
+      kickEl.textContent='Gratis '+((d.type||'ressource').toLowerCase());
+      titleEl.textContent='Hent “'+(d.title||'downloaden')+'”';
       direct.href=d.file||'#';
       gm.classList.remove('sent'); gm.classList.add('open'); gm.setAttribute('aria-hidden','false');
       submit.style.pointerEvents=''; errEl.textContent='';
@@ -188,12 +188,12 @@
     const dl=f=>{ const a=document.createElement('a'); a.href=f; a.download=''; document.body.appendChild(a); a.click(); a.remove(); };
     async function submitGet(){
       const name=nameEl.value.trim(), email=emailEl.value.trim();
-      if(!name){ errEl.textContent='Your name, please.'; return; }
-      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errEl.textContent='A valid email, please.'; return; }
+      if(!name){ errEl.textContent='Dit navn, tak.'; return; }
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errEl.textContent='En gyldig mail, tak.'; return; }
       submit.style.pointerEvents='none';
       try{ if (WEB3FORMS_KEY){ const fd=new FormData(); fd.append('access_key',WEB3FORMS_KEY);
-          fd.append('subject','Library download · '+(current.title||'')); fd.append('from_name','AXON Library'); fd.append('replyto',email);
-          fd.append('Name',name); fd.append('Email',email); fd.append('Resource',current.title||''); fd.append('Type',current.type||'');
+          fd.append('subject','Bibliotek download · '+(current.title||'')); fd.append('from_name','AXON Bibliotek'); fd.append('replyto',email);
+          fd.append('Navn',name); fd.append('Mail',email); fd.append('Ressource',current.title||''); fd.append('Type',current.type||'');
           await fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}); }
         else console.warn('[library] lead captured (no WEB3FORMS_KEY set):',{name,email,resource:current.title}); }
       catch(e){ console.warn('[library] send failed',e); }

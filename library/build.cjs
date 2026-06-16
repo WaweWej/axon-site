@@ -29,7 +29,7 @@ const fmtDate = s => { const d = new Date(s); return isNaN(d) ? (s||'') : d.toLo
 /* ---- minimal placeholder PDF (only created if a real file isn't there) ---- */
 function makePdf(title, sub){
   const e = s => String(s).replace(/[\\()]/g, m => '\\'+m);
-  const content = `BT /F1 26 Tf 60 770 Td (${e(title)}) Tj 0 -36 Td /F1 13 Tf (${e(sub)}) Tj 0 -28 Td (AXON. Replace this placeholder with the real guide.) Tj ET`;
+  const content = `BT /F1 26 Tf 60 770 Td (${e(title)}) Tj 0 -36 Td /F1 13 Tf (${e(sub)}) Tj 0 -28 Td (AXON. Erstat denne midlertidige fil med den rigtige guide.) Tj ET`;
   const objs = [
     '<</Type/Catalog/Pages 2 0 R>>',
     '<</Type/Pages/Kids[3 0 R]/Count 1>>',
@@ -48,7 +48,7 @@ function makePdf(title, sub){
 
 /* ---- shared chrome ---- */
 const head = (title, desc, og, bodyClass, bodyAttr) => `<!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,39 +74,39 @@ const head = (title, desc, og, bodyClass, bodyAttr) => `<!DOCTYPE html>
 <div class="wrap">`;
 
 const header = `<header class="site">
-  <a class="brand" href="${SITE}"><span class="dot"></span>AXON <small>/ Library</small></a>
+  <a class="brand" href="${SITE}"><span class="dot"></span>AXON <small>/ Bibliotek</small></a>
   <nav class="site-nav">
-    <a href="${SITE}">Home</a>
-    <a href="index.html" class="active">Library</a>
-    <a href="${SITE}?wizard=1" class="nav-cta">Book a call</a>
+    <a href="${SITE}">Forsiden</a>
+    <a href="index.html" class="active">Bibliotek</a>
+    <a href="${SITE}?wizard=1" class="nav-cta">Få en AI audit</a>
   </nav>
-  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  <button class="menu-btn" id="menuBtn" aria-label="Åbn menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <nav>
-    <a href="${SITE}" data-mclose>Home</a>
-    <a href="index.html" data-mclose>Library</a>
+    <a href="${SITE}" data-mclose>Forsiden</a>
+    <a href="index.html" data-mclose>Bibliotek</a>
   </nav>
-  <a href="${SITE}?wizard=1" class="btn btn-primary" data-mclose>Book a call →</a>
+  <a href="${SITE}?wizard=1" class="btn btn-primary" data-mclose>Få en AI audit →</a>
 </div>`;
 
 const modal = `<div class="getmodal" id="getmodal" aria-hidden="true" role="dialog" aria-modal="true">
   <div class="gm-scrim" data-gmclose></div>
   <div class="gm-inner">
     <button class="gm-close" data-gmclose type="button">Close</button>
-    <div class="gm-kicker" id="gm-kicker">Free download</div>
-    <h3 id="gm-title">Get the guide</h3>
+    <div class="gm-kicker" id="gm-kicker">Gratis download</div>
+    <h3 id="gm-title">Hent guiden</h3>
     <div class="gm-form" id="gm-form">
-      <p class="gm-sub">Tell us where to send it. You'll get the download link instantly, plus the occasional genuinely useful resource. No spam.</p>
+      <p class="gm-sub">Fortæl os, hvor vi skal sende den. Du får downloadlinket med det samme, plus den sjældne, virkelig brugbare ressource. Ingen spam.</p>
       <div class="gm-fields">
-        <input id="gm-name" type="text" placeholder="Your name" autocomplete="name">
-        <input id="gm-email" type="email" placeholder="Work email" autocomplete="email">
+        <input id="gm-name" type="text" placeholder="Dit navn" autocomplete="name">
+        <input id="gm-email" type="email" placeholder="Arbejdsmail" autocomplete="email">
       </div>
       <div class="gm-error" id="gm-error"></div>
-      <a class="btn btn-primary" id="gm-submit" role="button" tabindex="0">Send me the download →</a>
+      <a class="btn btn-primary" id="gm-submit" role="button" tabindex="0">Send mig downloaden →</a>
     </div>
     <div class="gm-done" id="gm-done">
-      <p class="gm-sub">Your download is starting now, and we've emailed a copy too. <a id="gm-direct" href="#" download>Click here</a> if it doesn't begin.</p>
+      <p class="gm-sub">Din download starter nu, og vi har sendt en kopi på mail. <a id="gm-direct" href="#" download>Klik her</a>, hvis den ikke går i gang.</p>
     </div>
   </div>
 </div>`;
@@ -126,15 +126,15 @@ ${modal}
 </body></html>`;
 
 const footerLinks = `<footer class="site"><div class="frame">
-  <div class="copy">© AXON · AI as operating advantage.</div>
-  <div class="f-links"><a href="${SITE}">Home</a><a href="index.html">Library</a><a href="${SITE}?wizard=1">Book a call</a></div>
+  <div class="copy">© AXON · AI som driftsfordel.</div>
+  <div class="f-links"><a href="${SITE}">Forsiden</a><a href="index.html">Bibliotek</a><a href="${SITE}?wizard=1">Få en AI audit</a></div>
 </div></footer>`;
 
-const pagesLabel = n => n ? ` · ${n} ${n==1?'page':'pages'}` : '';
+const pagesLabel = n => n ? ` · ${n} ${n==1?'side':'sider'}` : '';
 
 // per document-type colour (rgb triplet), matching the main site's section palette
-const TYPE_RGB = { Guide:'91,140,255', Template:'34,211,238', Checklist:'168,85,247',
-  Playbook:'245,158,11', Tutorial:'45,212,191', Toolkit:'244,86,156' };
+const TYPE_RGB = { Guide:'91,140,255', Skabelon:'34,211,238', Tjekliste:'168,85,247',
+  Drejebog:'245,158,11', Tutorial:'45,212,191', Toolkit:'244,86,156' };
 const tcOf = p => TYPE_RGB[p.type] || '91,140,255';
 
 const getBtn = (p, label) => p.gated
@@ -144,11 +144,11 @@ const getBtn = (p, label) => p.gated
 const card = p => `<div class="card rv" data-cat="${esc(p.type)}" style="--tc:${tcOf(p)}">
   <div class="c-art"><span class="badge">${esc(p.type)}</span></div>
   <div class="c-body">
-    <div class="meta-row">${esc(p.format)}${pagesLabel(p.pages)}<span class="dotsep"></span>${esc(p.level||'All levels')}</div>
+    <div class="meta-row">${esc(p.format)}${pagesLabel(p.pages)}<span class="dotsep"></span>${esc(p.level||'Alle niveauer')}</div>
     <h3><a href="${p.slug}.html">${esc(p.title)}</a></h3>
     <p>${esc(p.summary)}</p>
     <div class="c-foot">${p.gated
-      ? `<button class="getlink" data-get data-title="${esc(p.title)}" data-type="${esc(p.type)}" data-file="${esc(p.file)}">Get the ${esc(p.type.toLowerCase())} →</button>`
+      ? `<button class="getlink" data-get data-title="${esc(p.title)}" data-type="${esc(p.type)}" data-file="${esc(p.file)}">Hent ${esc(p.type.toLowerCase())} →</button>`
       : `<a class="getlink" href="${esc(p.file)}" download>Download →</a>`}</div>
   </div>
 </div>`;
@@ -162,7 +162,7 @@ const posts = fs.readdirSync(POSTS).filter(f => f.endsWith('.md')).map(f => {
   return {
     slug, title: data.title || slug, type: data.type || 'Guide',
     summary: data.summary || data.excerpt || '', format: data.format || 'PDF',
-    pages: data.pages || 0, level: data.level || 'All levels',
+    pages: data.pages || 0, level: data.level || 'Alle niveauer',
     file: data.file || ('files/' + slug + '.pdf'), gated: data.gated !== false,
     featured: !!data.featured, date: data.date || '', dateLabel: fmtDate(data.date),
     html: toHtml(body)
@@ -180,30 +180,30 @@ const types = [...new Set(posts.map(p => p.type))];
 const feat = posts.find(p => p.featured) || posts[0];
 const rest = posts.filter(p => p !== feat);
 const filterBtns = ['all', ...types].map((c,i) =>
-  `<button class="filter${i===0?' on':''}" data-filter="${esc(c)}">${i===0?'All resources':esc(c)}</button>`).join('');
+  `<button class="filter${i===0?' on':''}" data-filter="${esc(c)}">${i===0?'Alle ressourcer':esc(c)}</button>`).join('');
 
-const hub = head('AXON Library · free AI guides, templates and toolkits',
-  'High quality, downloadable guides, templates and playbooks for putting AI to work. Workflow audits, deployment checklists and team enablement from AXON.') +
+const hub = head('AXON Bibliotek · gratis AI guider, skabeloner og værktøjer',
+  'Gennemarbejdede guider, skabeloner og drejebøger til at få AI i arbejde. Kortlægning af arbejdsgange, tjeklister til drift og forankring i teamet, fra AXON.') +
 header + `
 <main>
   <div class="frame hub-head">
-    <div class="hub-kicker rv">The Library</div>
-    <h1 class="rv">Free tools to put AI to work.</h1>
-    <p class="rv">Field tested guides, templates and playbooks you can download and use today. The same kits we run with clients. Pick one, and put it to work this week.</p>
+    <div class="hub-kicker rv">Biblioteket</div>
+    <h1 class="rv">Gratis værktøjer, der får AI i arbejde.</h1>
+    <p class="rv">Gennemtestede guider, skabeloner og drejebøger, du kan hente og bruge i dag. De samme kits, vi kører med kunderne. Vælg ét, og sæt det i arbejde i denne uge.</p>
     <div class="filters rv">${filterBtns}</div>
   </div>
   <div class="frame">
     ${feat ? `<div class="featured rv" data-cat="${esc(feat.type)}" style="--tc:${tcOf(feat)}">
       <div class="f-body">
-        <div class="meta-row"><span class="type">Featured · ${esc(feat.type)}</span><span class="dotsep"></span>${esc(feat.format)}${pagesLabel(feat.pages)}</div>
+        <div class="meta-row"><span class="type">Udvalgt · ${esc(feat.type)}</span><span class="dotsep"></span>${esc(feat.format)}${pagesLabel(feat.pages)}</div>
         <h2><a href="${feat.slug}.html">${esc(feat.title)}</a></h2>
         <p>${esc(feat.summary)}</p>
-        <div class="f-actions">${getBtn(feat, 'Get the '+feat.type.toLowerCase())}<a class="ghostlink" href="${feat.slug}.html">Preview →</a></div>
+        <div class="f-actions">${getBtn(feat, 'Hent '+feat.type.toLowerCase())}<a class="ghostlink" href="${feat.slug}.html">Se mere →</a></div>
       </div>
       <div class="f-art"><span class="badge">${esc(feat.type)}</span></div>
     </div>` : ''}
     <div class="grid">
-      ${rest.length ? rest.map(card).join('\n') : '<div class="empty">More resources coming soon.</div>'}
+      ${rest.length ? rest.map(card).join('\n') : '<div class="empty">Flere ressourcer er på vej.</div>'}
     </div>
   </div>
   ${footerLinks}
@@ -213,7 +213,7 @@ fs.writeFileSync(path.join(DIR, 'index.html'), hub);
 /* ---- resource landing pages ---- */
 for (const p of posts){
   const related = posts.filter(x => x !== p).slice(0, 3);
-  const page = head(p.title + ' · AXON Library', p.summary, 'article', 'reading', ` data-doctype="${esc(p.type)}"`) + `
+  const page = head(p.title + ' · AXON Bibliotek', p.summary, 'article', 'reading', ` data-doctype="${esc(p.type)}"`) + `
 <div class="read-progress" aria-hidden="true"></div>` + header + `
 <article>
   <div class="res-head frame">
@@ -221,8 +221,8 @@ for (const p of posts){
       <div class="meta-row"><span class="type">${esc(p.type)}</span><span class="dotsep"></span>${esc(p.format)}${pagesLabel(p.pages)}<span class="dotsep"></span>${esc(p.level)}</div>
       <h1>${esc(p.title)}</h1>
       <p class="lede">${esc(p.summary)}</p>
-      <div class="res-actions">${getBtn(p, p.gated ? 'Get the '+p.type.toLowerCase() : 'Download the '+p.type.toLowerCase())}
-        <span class="res-note">${p.gated ? 'Free · emailed instantly' : 'Free · instant download'}</span></div>
+      <div class="res-actions">${getBtn(p, p.gated ? 'Hent '+p.type.toLowerCase() : 'Download '+p.type.toLowerCase())}
+        <span class="res-note">${p.gated ? 'Gratis · sendt med det samme' : 'Gratis · hent med det samme'}</span></div>
     </div>
     <div class="res-cover rv"><span class="badge">${esc(p.type)}</span><span class="res-format">${esc(p.format)}</span></div>
   </div>
@@ -230,11 +230,11 @@ for (const p of posts){
     ${p.html}
   </div>
   <div class="cta-card rv">
-    <h3>Want this run on your business?</h3>
-    <p>The guides are the do it yourself version. If you'd rather we did it with you, start with a 30 minute workflow audit.</p>
-    <a class="btn btn-primary" href="${SITE}?wizard=1">Book your audit →</a>
+    <h3>Vil du have det kørt på din forretning?</h3>
+    <p>Guiderne er gør det selv versionen. Vil du hellere have, at vi gør det sammen med jer, så start med en AI audit på 30 minutter.</p>
+    <a class="btn btn-primary" href="${SITE}?wizard=1">Få en AI audit →</a>
   </div>
-  ${related.length ? `<section class="related"><h4>More from the Library</h4><div class="grid">${related.map(card).join('\n')}</div></section>` : ''}
+  ${related.length ? `<section class="related"><h4>Mere fra biblioteket</h4><div class="grid">${related.map(card).join('\n')}</div></section>` : ''}
   ${footerLinks}
 </article>` + footer;
   fs.writeFileSync(path.join(DIR, p.slug + '.html'), page);

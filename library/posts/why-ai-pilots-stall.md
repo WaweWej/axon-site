@@ -1,26 +1,26 @@
 ---
-title: "Pilot to Production: the readiness checklist"
-type: Checklist
-summary: A 24 point checklist that tells you whether an AI pilot is ready to become a system your team relies on, or just a demo that wowed a room.
+title: Fra pilot til drift
+type: Tjekliste
+summary: En tjekliste på 24 punkter, der fortæller, om en AI pilot reelt er klar til at blive et system, jeres team kan stole på, eller bare en demo, der imponerede et mødelokale.
 format: PDF
 pages: 6
-level: Intermediate
+level: Øvet
 file: files/why-ai-pilots-stall.pdf
 gated: true
 date: 2026-06-08
 ---
 
-Almost every company has run an AI pilot. Almost none have AI in production. This checklist is the gate between the two. Run any pilot through it before you commit real workflow to it.
+Næsten alle virksomheder har kørt en AI pilot. Næsten ingen har AI i drift. Denne tjekliste er porten mellem de to. Kør enhver pilot igennem den, før I lægger rigtigt arbejde over på den.
 
-## What's inside
+## Hvad er der i
 
-- **24 production readiness checks** across four areas: ownership, surface, trust, and the last mile
-- **The "Monday test"**, a one line way to know if a system is actually load bearing
-- **Trust by design requirements**: visible confidence, escape hatches, and a memory of mistakes
-- **A red flag list** of the failure modes that quietly kill rollouts
+- **24 tjek for driftsklarhed** fordelt på fire områder: ejerskab, flade, tillid og den sidste meter
+- **"Mandagstesten"**, en enkel måde at vide, om et system reelt bærer vægt
+- **Krav om tillid fra start**: synlig sikkerhed, en nødudgang og en hukommelse for fejl
+- **En liste over røde flag**, de fejlmønstre, der stille slår en udrulning ihjel
 
-## Who it's for
+## Hvem er den til
 
-Anyone about to move an AI experiment into daily use, and anyone whose last pilot mysteriously faded after the demo.
+Alle, der er ved at flytte et AI forsøg over i daglig brug. Og alle, hvis sidste pilot på mystisk vis forsvandt efter demoen.
 
-> A demo proves something can work once. Production proves it works every time, for people who don't care how it works.
+> En demo beviser, at noget kan virke én gang. Drift beviser, at det virker hver gang, for folk der er ligeglade med, hvordan det virker.

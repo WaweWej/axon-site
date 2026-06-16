@@ -1,27 +1,27 @@
 ---
-title: The AI Workflow Audit Kit
+title: AI Arbejdsgangs Kit
 type: Guide
-summary: The exact 5 step audit we run in week one of every engagement. Find where work actually drags before you buy a single tool.
+summary: Den præcise femtrinsanalyse, vi kører i uge ét hos enhver kunde. Find, hvor arbejdet reelt går trægt, før du køber et eneste værktøj.
 format: PDF
 pages: 14
-level: All levels
+level: Alle niveauer
 file: files/workflow-audit-in-a-week.pdf
 gated: true
 featured: true
 date: 2026-06-12
 ---
 
-Most AI projects fail for a boring reason: they start with a tool instead of a problem. This kit flips that. A self contained workshop you can run with your team in an afternoon to find the highest leverage place to start.
+De fleste AI projekter fejler af en kedelig grund: de starter med et værktøj i stedet for et problem. Dette kit vender om på det. En selvkørende workshop, du kan afvikle med dit team på en eftermiddag for at finde det sted, hvor det giver mest at begynde.
 
-## What's inside
+## Hvad er der i
 
-- **The 5 step audit** (scope, trace, cost, score, brief) with worked examples
-- **A printable workflow mapping sheet** for the live session
-- **The AI fit scoring rubric** (repetition times tolerance times data) so you pick the leveraged use case, not the flashy one
-- **The one paragraph brief template** that gets a project to ready
+- **Den femtrinsanalyse**, vi bruger: afgræns, kortlæg, prissæt, scor, brief. Med gennemarbejdede eksempler.
+- **Et printbart kortlægningsark** til den fælles session
+- **Scoringsrubrikken for AI egnethed** (gentagelse gange tolerance gange data)
+- **Skabelonen til den korte brief**, der gør et projekt klar til at gå i gang
 
-## Who it's for
+## Hvem er den til
 
-Operations leads, founders and team managers who suspect AI could help but don't want to gamble on the wrong first project. No technical background required.
+Driftsansvarlige, stiftere og teamledere, der har en fornemmelse af, at AI kan hjælpe, men ikke vil gamble på det forkerte første projekt. Ingen teknisk baggrund nødvendig.
 
-> The hard part was never the technology. It's being honest about where the work drags, and disciplined about starting in exactly one place.
+> Det svære var aldrig teknologien. Det er at være ærlig om, hvor arbejdet går trægt, og disciplineret nok til at starte præcis ét sted.

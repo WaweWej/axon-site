@@ -1,26 +1,26 @@
 ---
-title: The AI Fluency Playbook
-type: Playbook
-summary: A practical playbook for turning "we have AI tools" into "this is just how we work now", because adoption is a people problem, not a tools problem.
+title: Drejebog til AI fortrolighed
+type: Drejebog
+summary: En praktisk drejebog, der gør "vi har AI værktøjer" til "sådan arbejder vi nu". For udbredelse er et menneskeproblem, ikke et værktøjsproblem.
 format: PDF
 pages: 18
-level: All levels
+level: Alle niveauer
 file: files/ai-fluency-is-a-people-problem.pdf
 gated: true
 date: 2026-05-28
 ---
 
-You can deploy the best AI systems in the world and still see no change in output. The bottleneck is fluency, and fluency is built in people, not bought in licences. This playbook is how we build it.
+Du kan rulle verdens bedste AI systemer ud og stadig ikke se nogen ændring i output. Flaskehalsen er fortrolighed. Og fortrolighed bygges i mennesker, ikke købes i licenser. Denne drejebog er måden, vi bygger den på.
 
-## What's inside
+## Hvad er der i
 
-- **The four marks of a fluent team member**: recognise, frame, judge, fold in
-- **A 30/60/90 enablement plan** you can adapt to any team
-- **The champions model**, why one fluent person beats any top down mandate
-- **The one metric that matters**: a month later, are people using it without being told to?
+- **De fire kendetegn** på et fortroligt teammedlem: genkende, formulere, vurdere, fælde ind
+- **En 30/60/90 plan for forankring**, du kan tilpasse ethvert team
+- **Ambassadørmodellen**, derfor slår én fortrolig person ethvert topstyret mandat
+- **Den ene måling, der tæller**: en måned efter, bruger folk det uden at få besked på det?
 
-## Who it's for
+## Hvem er den til
 
-Leaders rolling AI out to a team and wondering why the tools aren't translating into results.
+Ledere, der ruller AI ud til et team og undrer sig over, hvorfor værktøjerne ikke oversættes til resultater.
 
-> Giving a team AI tools without building fluency is like buying a gym membership and expecting to get fit. The equipment was never the bottleneck.
+> At give et team AI værktøjer uden at bygge fortrolighed er som at købe et fitnessmedlemskab og forvente at komme i form. Udstyret var aldrig flaskehalsen.

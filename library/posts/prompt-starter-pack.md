@@ -1,26 +1,26 @@
 ---
-title: The Prompt Starter Pack
-type: Template
-summary: 25 ready to use prompts for the tasks teams spend the most time on. Copy, adapt, and save hours starting today.
+title: Prompt Startpakke
+type: Skabelon
+summary: 25 klar til brug prompts til de opgaver, teams bruger mest tid på. Kopiér, tilpas, og spar timer fra i dag.
 format: PDF
 pages: 9
-level: All levels
+level: Alle niveauer
 file: files/prompt-starter-pack.pdf
 gated: true
 date: 2026-06-14
 ---
 
-Most people new to AI get stuck on the same thing: what do I actually type? This pack removes the blank page with 25 prompts that work from day one.
+De fleste, der lige er begyndt med AI, sidder fast på det samme: hvad skriver jeg egentlig? Denne pakke fjerner det blanke felt med 25 prompts, der virker fra dag ét.
 
-## What's inside
+## Hvad er der i
 
-- **25 field tested prompts** for emails, notes, proposals, posts and research
-- **A simple pattern** for how a good prompt is built, so you can write more yourself
-- **Before and after examples**, so you see what moves the quality
-- **A short guide** on when to trust the output, and when to check it
+- **25 gennemtestede prompts** til mails, referater, tilbud, opslag og research
+- **Et simpelt mønster** for, hvordan en god prompt er bygget op, så I selv kan lave flere
+- **Før og efter eksempler**, så I ser, hvad der flytter kvaliteten
+- **En kort guide** til, hvornår I skal stole på svaret, og hvornår I skal tjekke det
 
-## Who it's for
+## Hvem er den til
 
-Teams that want to get going right now, without a course first. No technical background required.
+Teams, der vil i gang med det samme, uden et kursus først. Ingen teknisk baggrund nødvendig.
 
-> The blank page is the most expensive part of AI. Remove it, and half the resistance disappears.
+> Det blanke felt er den dyreste del af AI. Fjern det, og halvdelen af modstanden forsvinder.
