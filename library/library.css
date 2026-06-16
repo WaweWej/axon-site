@@ -291,3 +291,8 @@ footer.site .copy{font-family:var(--mono);font-size:12px;letter-spacing:.05em;co
   footer.site .frame{flex-direction:column;align-items:flex-start;gap:16px}
   .gm-inner{padding:26px 22px}
 }
+
+/* donation prompt in download success */
+.gm-donate{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.gm-donate p{color:var(--ink-mid);font-size:14px;line-height:1.5;margin-bottom:14px}
+.gm-donate .btn{width:100%;justify-content:center;margin-top:0}

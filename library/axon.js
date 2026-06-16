@@ -22,7 +22,9 @@
 
     // background light shifts by document type, using the main site's section palette
     const PAL = { Guide:[0x5b8cff,0x9b6bff], Skabelon:[0x22d3ee,0x4f8bff], Tjekliste:[0xa855f7,0x6b8cff],
-                  Drejebog:[0xf59e0b,0x6aa0ff], Toolkit:[0xf4569c,0x7aa2ff], Tutorial:[0x2dd4bf,0x4cc9f0] };
+                  Drejebog:[0xf59e0b,0x6aa0ff], Playbook:[0xf59e0b,0x6aa0ff], Sammenligning:[0xf4569c,0x7aa2ff],
+                  Prompt:[0x2dd4bf,0x4cc9f0], Snydeark:[0xfacc15,0x7aa2ff], Ordbog:[0x94a3b8,0x6b8cff],
+                  Beregner:[0x34d399,0x4cc9f0], Workshop:[0xa78bfa,0x6b8cff] };
     const pair = PAL[document.body.dataset.doctype] || [0x5b8cff,0x9b6bff];
     const cA = new THREE.Color(pair[0]), cB = new THREE.Color(pair[1]), cMix = new THREE.Color().copy(cA).lerp(cB,.5);
     if (document.body.dataset.doctype){
@@ -207,6 +209,11 @@
     submit.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); submitGet(); }});
     emailEl.addEventListener('keydown',e=>{ if(e.key==='Enter') submitGet(); });
     addEventListener('keydown',e=>{ if(e.key==='Escape'&&gm.classList.contains('open')) closeGet(); });
+    // donation prompt after download (MobilePay)
+    const gmDonate=document.getElementById('gm-donate');
+    const MOBILEPAY_LINK=''; // paste your MobilePay box link to go live
+    if (gmDonate) gmDonate.addEventListener('click', ()=>{ if (MOBILEPAY_LINK){ window.open(MOBILEPAY_LINK,'_blank','noopener'); }
+      else { const t=gmDonate.textContent; gmDonate.textContent='Tilføj MobilePay link i koden'; setTimeout(()=>gmDonate.textContent=t,2000); } });
   }
 
   /* ============ mobile menu ============ */

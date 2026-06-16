@@ -107,6 +107,10 @@ const modal = `<div class="getmodal" id="getmodal" aria-hidden="true" role="dial
     </div>
     <div class="gm-done" id="gm-done">
       <p class="gm-sub">Din download starter nu, og vi har sendt en kopi på mail. <a id="gm-direct" href="#" download>Klik her</a>, hvis den ikke går i gang.</p>
+      <div class="gm-donate">
+        <p>Var den nyttig? Støt vidensbanken, så den forbliver gratis for alle.</p>
+        <a class="btn btn-primary" id="gm-donate" role="button" tabindex="0">Støt med MobilePay →</a>
+      </div>
     </div>
   </div>
 </div>`;
@@ -134,7 +138,8 @@ const pagesLabel = n => n ? ` · ${n} ${n==1?'side':'sider'}` : '';
 
 // per document-type colour (rgb triplet), matching the main site's section palette
 const TYPE_RGB = { Guide:'91,140,255', Skabelon:'34,211,238', Tjekliste:'168,85,247',
-  Drejebog:'245,158,11', Tutorial:'45,212,191', Toolkit:'244,86,156' };
+  Drejebog:'245,158,11', Playbook:'245,158,11', Sammenligning:'244,86,156', Prompt:'45,212,191',
+  Snydeark:'250,204,21', Ordbog:'148,163,184', Beregner:'52,211,153', Workshop:'167,139,250' };
 const tcOf = p => TYPE_RGB[p.type] || '91,140,255';
 
 const getBtn = (p, label) => p.gated
