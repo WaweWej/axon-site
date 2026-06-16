@@ -30,7 +30,15 @@
     <a href="index.html" class="active">Library</a>
     <a href="../index.html?wizard=1" class="nav-cta">Book a call</a>
   </nav>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
 </header>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="../index.html" data-mclose>Home</a>
+    <a href="index.html" data-mclose>Library</a>
+  </nav>
+  <a href="../index.html?wizard=1" class="btn btn-primary" data-mclose>Book a call →</a>
+</div>
 <article>
   <div class="res-head frame">
     <div class="res-info rv">

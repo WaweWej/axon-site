@@ -80,7 +80,15 @@ const header = `<header class="site">
     <a href="index.html" class="active">Library</a>
     <a href="${SITE}?wizard=1" class="nav-cta">Book a call</a>
   </nav>
-</header>`;
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="${SITE}" data-mclose>Home</a>
+    <a href="index.html" data-mclose>Library</a>
+  </nav>
+  <a href="${SITE}?wizard=1" class="btn btn-primary" data-mclose>Book a call →</a>
+</div>`;
 
 const modal = `<div class="getmodal" id="getmodal" aria-hidden="true" role="dialog" aria-modal="true">
   <div class="gm-scrim" data-gmclose></div>

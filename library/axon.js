@@ -209,6 +209,20 @@
     addEventListener('keydown',e=>{ if(e.key==='Escape'&&gm.classList.contains('open')) closeGet(); });
   }
 
+  /* ============ mobile menu ============ */
+  const menuBtn = document.getElementById('menuBtn'), mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu){
+    const openM = () => { menuBtn.classList.add('open'); mobileMenu.classList.add('open');
+      menuBtn.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false');
+      if (window.__lenis) window.__lenis.stop(); document.body.style.overflow='hidden'; };
+    const closeM = () => { menuBtn.classList.remove('open'); mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true');
+      if (window.__lenis) window.__lenis.start(); document.body.style.overflow=''; };
+    menuBtn.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeM() : openM());
+    mobileMenu.querySelectorAll('[data-mclose]').forEach(el => el.addEventListener('click', closeM));
+    addEventListener('keydown', e => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeM(); });
+  }
+
   /* ============ titles: per-letter colour-wheel hover + binary flicker ============ */
   (function titles(){
     function wrap(h){

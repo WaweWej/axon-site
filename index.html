@@ -82,10 +82,25 @@
   .nav-cta{font-family:var(--body);font-weight:600;font-size:14px;padding:10px 20px;border:1px solid var(--line);
     border-radius:100px;color:var(--ink);transition:.3s var(--ease);background:rgba(255,255,255,.02)}
   .nav-cta:hover{background:var(--ink);color:#05070d;transform:translateY(-1px)}
-  @media(max-width:720px){nav.links a:not(.nav-cta){display:none}}
+  .menu-btn{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;border:1px solid var(--line);
+    border-radius:12px;background:rgba(5,7,13,.4);backdrop-filter:blur(8px);cursor:pointer;padding:0 10px;transition:.3s var(--ease)}
+  .menu-btn span{display:block;height:2px;width:100%;background:var(--ink);border-radius:2px;transition:transform .35s var(--ease),opacity .25s}
+  .menu-btn.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+  .menu-btn.open span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+  .mobile-menu{position:fixed;inset:0;z-index:25;display:flex;flex-direction:column;justify-content:center;gap:30px;
+    padding:0 clamp(28px,9vw,60px);background:rgba(5,7,13,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .45s var(--ease),transform .45s var(--ease),visibility 0s linear .45s}
+  .mobile-menu.open{opacity:1;visibility:visible;transform:none;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+  .mobile-menu nav{display:flex;flex-direction:column;gap:6px}
+  .mobile-menu nav a{font-family:var(--display);font-weight:600;font-size:clamp(30px,9vw,46px);letter-spacing:-.02em;color:var(--ink);
+    display:flex;align-items:baseline;gap:18px;padding:8px 0;transition:color .3s}
+  .mobile-menu nav a:active{color:var(--accent)}
+  .mobile-menu .mm-i{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--accent);font-weight:400}
+  .mobile-menu .btn{align-self:flex-start;margin-top:14px;font-size:16px;padding:16px 30px}
+  @media(max-width:720px){nav.links{display:none}.menu-btn{display:flex}}
 
   main{position:relative;z-index:5}
-  section{min-height:100vh;display:flex;align-items:center;padding:0 clamp(20px,7vw,120px);pointer-events:none}
+  section{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:0 clamp(20px,7vw,120px);pointer-events:none}
   .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
   section.in .reveal{opacity:1;transform:none}
   .reveal:nth-child(2){transition-delay:.08s}
@@ -146,6 +161,29 @@
   .sound-toggle.on .eq i:nth-child(3){animation-delay:.36s}
   @keyframes eq{0%,100%{height:3px}50%{height:12px}}
   @media(max-width:560px){.sound-toggle{display:none}}
+
+  /* ===== mobile polish ===== */
+  @media(max-width:640px){
+    header{padding:16px 20px}
+    .hero-wrap p,.step p,.outro p,.gallery-head p{font-size:16px;line-height:1.6}
+    .hero-wrap p{max-width:none}
+    .cta-row{width:100%}
+    .cta-row .btn{width:100%;justify-content:center;padding:16px 24px}
+    section{padding-left:22px;padding-right:22px}
+    .hint{display:none}
+    .gallery{padding-block:clamp(56px,9vh,90px)}
+    .float-field{gap:18px;padding-block:20px}
+    .site-footer{padding:46px 22px 34px}
+    .site-footer .f-top{flex-direction:column;gap:28px}
+    .site-footer .f-cols{gap:30px}
+    .site-footer .f-bot{flex-direction:column;align-items:flex-start;gap:12px}
+    .wizard{padding:16px}
+    .wizard-inner{max-height:90vh;max-height:90svh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+    .opt{padding:16px 18px}
+    .veil-l,.veil-r{width:100%}
+    .veil-l{background:linear-gradient(to right, rgba(5,7,13,.74), rgba(5,7,13,.42) 55%, rgba(5,7,13,.2))}
+    .veil-r{background:linear-gradient(to left, rgba(5,7,13,.74), rgba(5,7,13,.42) 55%, rgba(5,7,13,.2))}
+  }
 
   /* ===== binary buttons: the fill is live 0/1, label decodes on hover ===== */
   .btn,.gallery-all{position:relative;overflow:hidden;isolation:isolate}
@@ -317,7 +355,18 @@
       <a href="#upskill">Training</a>
       <a href="library/">Library</a>
     </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav>
+      <a href="#audit" data-mclose><span class="mm-i">01</span>Approach</a>
+      <a href="#deploy" data-mclose><span class="mm-i">02</span>Systems</a>
+      <a href="#upskill" data-mclose><span class="mm-i">03</span>Training</a>
+      <a href="library/"><span class="mm-i">04</span>Library</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary" data-wizard>Book your audit →</a>
+  </div>
 
   <main>
     <section id="hero" data-formation="0" data-side="left">
@@ -1026,7 +1075,10 @@
     submitBtn.style.pointerEvents = '';
   }
 
-  function open(){ wizard.classList.add('open'); wizard.setAttribute('aria-hidden','false');
+  function open(){
+    const mm=document.getElementById('mobileMenu'), mb=document.getElementById('menuBtn');
+    if (mm) mm.classList.remove('open'); if (mb){ mb.classList.remove('open'); mb.setAttribute('aria-expanded','false'); }
+    wizard.classList.add('open'); wizard.setAttribute('aria-hidden','false');
     if (window.__lenis) window.__lenis.stop(); document.body.style.overflow = 'hidden'; show(0);
     setTimeout(() => { const f = wizard.querySelector('.wstep.active .opt, .wstep.active input'); if (f) f.focus(); }, 60); }
   function close(){ wizard.classList.remove('open'); wizard.setAttribute('aria-hidden','true');
@@ -1135,6 +1187,21 @@
     a.addEventListener('mouseleave', () => { hovering = false; clearInterval(a._d); a.textContent = a.dataset.orig; a.style.width = ''; move(active); });
   });
   addEventListener('resize', () => move(hovering ? null : active));
+
+  // mobile menu
+  const menuBtn = document.getElementById('menuBtn'), mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu){
+    const openM = () => { menuBtn.classList.add('open'); mobileMenu.classList.add('open');
+      menuBtn.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false');
+      if (window.__lenis) window.__lenis.stop(); document.body.style.overflow = 'hidden'; };
+    const closeM = () => { menuBtn.classList.remove('open'); mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true');
+      if (window.__lenis) window.__lenis.start(); document.body.style.overflow = ''; };
+    menuBtn.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeM() : openM());
+    mobileMenu.querySelectorAll('[data-mclose]').forEach(el => el.addEventListener('click', closeM));
+    addEventListener('keydown', e => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeM(); });
+    window.__closeMenu = closeM;
+  }
 })();
 </script>
 <script>
