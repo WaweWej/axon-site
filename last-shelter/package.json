@@ -1,0 +1,10 @@
+{
+  "name": "last-shelter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Last Shelter — a browser game about social justice, survival, and the arguments we use to decide who lives.",
+  "scripts": {
+    "start": "node server.cjs"
+  },
+  "license": "UNLICENSED"
+}

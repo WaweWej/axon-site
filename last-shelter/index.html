@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Shelter · A survival debate on who deserves to live</title>
+<meta name="description" content="The Last Shelter is a browser game about social justice under scarcity. The shelter has room for a few. You decide who gets in — then a council of voices makes you defend it.">
+<meta name="theme-color" content="#05070d">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Last Shelter">
+<meta property="og:description" content="Scarcity, survival, and the arguments we use to decide who lives. A debate game.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Cpath d='M16 5 L26 14 V27 H6 V14 Z' fill='none' stroke='%23a78bfa' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M13 27 V19 H19 V27' fill='none' stroke='%23fbbf24' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070d; --bg-soft:#080b12;
+  --ink:#eaf0ff; --ink-soft:#8a93ad; --ink-mid:#c5cee4;
+  --accent:#6366f1; --accent-2:#a78bfa; --gold:#fbbf24;
+  --warm:#f4a06c; --danger:#f87171; --ok:#6ee7b7;
+  --line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05);
+  --card:rgba(16,20,32,.62);
+  --display:'Space Grotesk',sans-serif; --body:'Instrument Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --maxw:1080px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden;line-height:1.55;min-height:100vh}
+::selection{background:var(--accent-2);color:#05070d}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:6px}
+button{font-family:inherit;cursor:pointer;color:inherit;background:none;border:none}
+
+/* ambience */
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+.fade{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 50% 28%, transparent 22%, rgba(5,7,13,.55) 100%),
+    linear-gradient(to bottom, rgba(5,7,13,.3) 0%, rgba(5,7,13,.55) 50%, rgba(5,7,13,.8) 100%)}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.wrap{position:relative;z-index:3;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+/* header */
+header{position:relative;z-index:5;max-width:var(--maxw);margin:0 auto;padding:22px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;letter-spacing:.2px}
+.brand svg{width:26px;height:26px;flex:none}
+.brand b{font-weight:700}
+.brand span{color:var(--ink-soft);font-weight:400;font-size:.82rem;font-family:var(--mono);letter-spacing:1px;text-transform:uppercase}
+.hbar{display:flex;align-items:center;gap:18px;font-family:var(--mono);font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft)}
+.hbar .live{color:var(--ink-mid)}
+.hbar .live b{color:var(--gold);font-weight:500}
+
+/* generic screen */
+.screen{display:none;animation:rise .6s var(--ease) both}
+.screen.on{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent-2)}
+
+/* INTRO */
+.hero{max-width:760px;margin:6vh auto 0;text-align:center}
+.hero h1{font-family:var(--display);font-weight:700;line-height:1.02;letter-spacing:-1.5px;
+  font-size:clamp(2.6rem,7vw,4.6rem);margin:18px 0 0}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--accent-2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lede{color:var(--ink-mid);font-size:clamp(1.05rem,2.4vw,1.32rem);margin:22px auto 0;max-width:580px}
+.hero .sub{color:var(--ink-soft);font-size:.96rem;margin:14px auto 0;max-width:560px}
+.tri{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:30px 0 0}
+.tri span{font-family:var(--mono);font-size:.74rem;letter-spacing:1.5px;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:8px 15px;color:var(--ink-mid);background:rgba(255,255,255,.02)}
+
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.82rem;
+  letter-spacing:1.5px;text-transform:uppercase;padding:15px 26px;border-radius:12px;
+  border:1px solid transparent;transition:transform .3s var(--ease),background .3s,border-color .3s,opacity .3s;will-change:transform}
+.btn.primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#0a0a14;font-weight:500}
+.btn.primary:hover{transform:translateY(-2px)}
+.btn.ghost{border-color:var(--line);color:var(--ink-mid)}
+.btn.ghost:hover{border-color:var(--accent-2);color:var(--ink)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:34px 0 0}
+
+/* SCENARIO header */
+.brief{max-width:760px;margin:3vh auto 0;text-align:center}
+.brief h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,4.6vw,2.7rem);letter-spacing:-.6px;margin:12px 0 0}
+.brief p{color:var(--ink-mid);margin:16px auto 0;max-width:620px}
+.meter{max-width:760px;margin:26px auto 0;display:flex;align-items:center;gap:14px;
+  border:1px solid var(--line);border-radius:14px;padding:16px 20px;background:var(--card);backdrop-filter:blur(8px)}
+.meter .big{font-family:var(--display);font-size:1.8rem;font-weight:700;color:var(--gold);line-height:1;min-width:64px}
+.meter .lab{font-family:var(--mono);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft)}
+.meter .desc{color:var(--ink-mid);font-size:.92rem}
+.meter .bar{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.meter .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent-2),var(--gold));transition:width .4s var(--ease)}
+
+/* survivor grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px;margin:26px 0 0}
+.card{position:relative;border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--card);
+  backdrop-filter:blur(8px);transition:transform .3s var(--ease),border-color .3s,background .3s;cursor:pointer;overflow:hidden}
+.card:hover{transform:translateY(-3px);border-color:rgba(167,139,250,.4)}
+.card.sel{border-color:var(--gold);background:rgba(251,191,36,.07)}
+.card.sel::after{content:"✓ ABOARD";position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:1.5px;color:var(--gold);border:1px solid rgba(251,191,36,.5);border-radius:99px;padding:3px 8px}
+.card .av{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:var(--display);
+  font-weight:700;font-size:1.2rem;color:#0a0a14;margin-bottom:13px}
+.card h3{font-family:var(--display);font-weight:600;font-size:1.12rem;letter-spacing:-.3px}
+.card .role{font-family:var(--mono);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent-2);margin-top:3px}
+.card .plea{color:var(--ink-mid);font-size:.9rem;margin-top:11px;font-style:italic}
+.card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:13px}
+.card .tags span{font-family:var(--mono);font-size:.64rem;letter-spacing:.5px;color:var(--ink-soft);
+  border:1px solid var(--line-soft);border-radius:6px;padding:3px 7px;background:rgba(255,255,255,.02)}
+
+.selbar{position:sticky;bottom:0;z-index:6;margin:22px -22px 0;padding:16px 22px;
+  background:linear-gradient(to top,rgba(5,7,13,.96),rgba(5,7,13,.7));border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;backdrop-filter:blur(10px)}
+.selbar .count{font-family:var(--mono);font-size:.82rem;letter-spacing:1px;color:var(--ink-mid)}
+.selbar .count b{color:var(--gold)}
+
+/* DEBATE */
+.debate{max-width:760px;margin:3vh auto 0}
+.council{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.council .face{width:48px;height:48px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:1.1rem;color:#0a0a14;
+  box-shadow:0 0 0 1px var(--line),0 0 30px rgba(167,139,250,.25)}
+.council .who b{font-family:var(--display);font-size:1.04rem}
+.council .who span{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+.bubble{border:1px solid var(--line);border-radius:16px;border-top-left-radius:4px;padding:20px 22px;background:var(--card);backdrop-filter:blur(8px);
+  font-size:1.12rem;line-height:1.5;color:var(--ink);margin-top:6px;position:relative}
+.bubble .q{color:var(--ink-mid);font-size:.78rem;font-family:var(--mono);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:10px}
+.answers{display:flex;flex-direction:column;gap:11px;margin-top:18px}
+.ans{text-align:left;border:1px solid var(--line);border-radius:13px;padding:16px 18px;background:rgba(255,255,255,.015);
+  transition:transform .25s var(--ease),border-color .25s,background .25s}
+.ans:hover{transform:translateX(4px);border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.05)}
+.ans b{display:block;font-size:1.02rem;margin-bottom:4px}
+.ans span{color:var(--ink-soft);font-size:.86rem;font-family:var(--mono);letter-spacing:.5px}
+.ans.chosen{border-color:var(--gold);background:rgba(251,191,36,.06)}
+.retort{margin-top:18px;border-left:2px solid var(--accent-2);padding:4px 0 4px 18px;color:var(--ink-mid);
+  font-size:1rem;animation:rise .5s var(--ease) both}
+.retort b{color:var(--accent-2);font-family:var(--mono);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px}
+.dprog{display:flex;gap:6px;margin-bottom:22px}
+.dprog i{flex:1;height:3px;border-radius:99px;background:rgba(255,255,255,.08)}
+.dprog i.done{background:var(--accent-2)}
+.dprog i.now{background:var(--gold)}
+
+/* VERDICT */
+.verdict{max-width:780px;margin:3vh auto 0}
+.verdict h2{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,5vw,3rem);letter-spacing:-.8px;text-align:center}
+.verdict .vsub{text-align:center;color:var(--ink-mid);margin:14px auto 0;max-width:600px}
+.panel{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--card);backdrop-filter:blur(8px);margin-top:18px}
+.panel h4{font-family:var(--mono);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent-2);margin-bottom:14px}
+.fate{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.fate:last-child{border-bottom:none}
+.fate .av{width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;font-family:var(--display);font-weight:700;color:#0a0a14}
+.fate .n b{font-family:var(--display)}
+.fate .n p{color:var(--ink-soft);font-size:.86rem;margin-top:2px}
+.fate .stat{margin-left:auto;font-family:var(--mono);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:99px;white-space:nowrap}
+.fate .stat.in{color:var(--ok);border:1px solid rgba(110,231,183,.4)}
+.fate .stat.out{color:var(--ink-soft);border:1px solid var(--line)}
+.lean{margin-top:10px}
+.lean .row{display:flex;align-items:center;gap:12px;margin:11px 0}
+.lean .row .nm{width:124px;font-size:.9rem;color:var(--ink-mid);flex:none}
+.lean .row .track{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.lean .row .track i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0;transition:width .8s var(--ease)}
+.lean .row .pc{width:42px;text-align:right;font-family:var(--mono);font-size:.78rem;color:var(--ink-soft)}
+.lean .row .q{font-family:var(--mono);font-size:.66rem;color:var(--ink-soft);width:100%;margin:-4px 0 6px 136px}
+.mirror{font-size:1.15rem;line-height:1.55;color:var(--ink);font-style:italic}
+.mirror .nm{color:var(--gold);font-style:normal;font-family:var(--display);font-weight:600}
+
+footer{position:relative;z-index:3;text-align:center;padding:50px 22px 60px;color:var(--ink-soft);font-size:.82rem;font-family:var(--mono);letter-spacing:.5px}
+footer a{color:var(--ink-mid);border-bottom:1px solid var(--line)}
+
+.disc{max-width:600px;margin:30px auto 0;text-align:center;color:var(--ink-soft);font-size:.84rem;line-height:1.6}
+
+@media(max-width:640px){
+  .hbar .live{display:none}
+  .meter{flex-wrap:wrap}
+  .lean .row .nm{width:96px}
+  .lean .row .q{margin-left:108px}
+}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div class="fade"></div>
+<div class="grain"></div>
+
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 L27 14 V28 H5 V14 Z" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 28 V19 H20 V28" fill="none" stroke="#fbbf24" stroke-width="1.6"/></svg>
+    <b>The Last Shelter</b><span>a survival debate</span>
+  </div>
+  <div class="hbar">
+    <span class="live" id="hlive"></span>
+    <button class="restart" id="hrestart" style="font:inherit;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft)">↺ Restart</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- INTRO -->
+  <section class="screen on" id="s-intro">
+    <div class="hero">
+      <div class="kicker">Scarcity · Survival · Justice</div>
+      <h1>Who gets <em>in?</em></h1>
+      <p class="lede">The cold is coming and the shelter has room for a few. Outside, more people than seats.</p>
+      <p class="sub">You decide who lives. Then a council of voices makes you say <em>why</em> — out loud, with reasons you'd defend to the ones left in the snow.</p>
+      <div class="tri"><span>Social justice</span><span>Survival</span><span>Debate</span></div>
+      <div class="cta-row">
+        <button class="btn primary" id="go">Open the door →</button>
+        <button class="btn ghost" id="how">How it works</button>
+      </div>
+      <p class="disc" id="howtext" hidden>No right answers are scored. Every framework you'll be offered — saving the most lives, treating each life equally, helping the worst-off first — is defended by real philosophers and contradicted by others. The game only shows you which one <em>you</em> reached for, and what it cost.</p>
+    </div>
+  </section>
+
+  <!-- BRIEF -->
+  <section class="screen" id="s-brief">
+    <div class="brief">
+      <div class="kicker" id="b-kicker">Scenario</div>
+      <h2 id="b-title"></h2>
+      <p id="b-premise"></p>
+    </div>
+    <div class="meter">
+      <div class="big" id="b-cap"></div>
+      <div>
+        <div class="lab">Seats / Applicants</div>
+        <div class="desc" id="b-capdesc"></div>
+      </div>
+      <div class="bar"><i id="b-bar"></i></div>
+    </div>
+    <div class="cta-row" style="margin-top:26px">
+      <button class="btn primary" id="b-go">Meet the applicants →</button>
+    </div>
+  </section>
+
+  <!-- SELECT -->
+  <section class="screen" id="s-select">
+    <div class="brief" style="margin-top:1vh">
+      <div class="kicker">Decision · 1 of 2</div>
+      <h2 style="font-size:clamp(1.5rem,4vw,2.1rem)">Choose who comes in</h2>
+      <p id="sel-hint"></p>
+    </div>
+    <div class="grid" id="sel-grid"></div>
+    <div class="selbar">
+      <div class="count"><b id="sel-n">0</b> of <span id="sel-cap">0</span> seats filled</div>
+      <button class="btn primary" id="sel-go" disabled>Seal the door →</button>
+    </div>
+  </section>
+
+  <!-- DEBATE -->
+  <section class="screen" id="s-debate">
+    <div class="debate">
+      <div class="kicker" style="margin-bottom:14px">Decision · 2 of 2 — The Council</div>
+      <div class="dprog" id="d-prog"></div>
+      <div class="council">
+        <div class="face" id="d-face"></div>
+        <div class="who"><b id="d-name"></b><span id="d-title"></span></div>
+      </div>
+      <div class="bubble"><span class="q">puts it to you</span><span id="d-q"></span>
+        <div class="answers" id="d-answers"></div>
+        <div id="d-retortwrap"></div>
+      </div>
+      <div class="cta-row" id="d-nextwrap" style="margin-top:22px;justify-content:flex-end" hidden>
+        <button class="btn primary" id="d-next">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERDICT -->
+  <section class="screen" id="s-verdict">
+    <div class="verdict">
+      <div class="kicker" style="text-align:center;display:block">The door is sealed</div>
+      <h2 id="v-head"></h2>
+      <p class="vsub" id="v-sub"></p>
+
+      <div class="panel">
+        <h4>What became of them</h4>
+        <div id="v-fates"></div>
+      </div>
+
+      <div class="panel">
+        <h4>The reasons you reached for</h4>
+        <div class="lean" id="v-lean"></div>
+      </div>
+
+      <div class="panel">
+        <h4>The mirror</h4>
+        <p class="mirror" id="v-mirror"></p>
+      </div>
+
+      <div class="cta-row">
+        <button class="btn primary" id="v-again">Play another night →</button>
+        <button class="btn ghost" id="v-share">Copy my verdict</button>
+      </div>
+      <p class="disc">This is fiction built to provoke reflection, not a measure of your worth. The hardest part of justice under scarcity is that decent people, reasoning carefully, still disagree.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Built as a debate, not a quiz. · <a href="https://github.com/WaweWej/last-shelter" target="_blank" rel="noopener">source</a>
+</footer>
+
+<script>
+/* ============================== DATA ============================== */
+// Five ethical lenses the player's answers map onto.
+const LENSES = {
+  util:   { name:"Greatest good",  q:"save the most lives / most capability" },
+  egal:   { name:"Equal worth",    q:"every life counts the same; no ranking" },
+  prior:  { name:"Worst-off first",q:"the most vulnerable have first claim" },
+  desert: { name:"Merit & contribution", q:"those who give back earn the seat" },
+  care:   { name:"Bonds & loyalty",q:"we owe more to our own / the connected" },
+};
+
+// avatar gradient palette
+const PAL = ["#a78bfa","#fbbf24","#6ee7b7","#f4a06c","#f87171","#7dd3fc","#c4b5fd","#fcd34d"];
+function grad(i){ const a=PAL[i%PAL.length], b=PAL[(i+3)%PAL.length]; return `linear-gradient(135deg,${a},${b})`; }
+const initials = n => n.split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase();
+
+const SCENARIOS = [
+{
+  id:"winter",
+  kicker:"Scenario · The Long Winter",
+  title:"The shelter on the ridge",
+  premise:"A grid collapse, then a cold front that doesn't lift. Your shelter has heat and food for four people through the winter. Eight came up the ridge before the road froze. The others will not last the night out there.",
+  capacity:4,
+  survivors:[
+    { name:"Dr. Amara Osei", role:"Field doctor", plea:"“If anyone gets sick or hurt in here, I'm the difference between a scare and a funeral.”", tags:["Heals the group","Age 44","No family left"], traits:["useful","alone"] },
+    { name:"Mateo Ruiz", role:"Diabetic, 9", plea:"“My insulin's in my bag. I can carry water, I'm strong for my size.”", tags:["Child","Needs insulin","Frightened"], traits:["child","sick","vulnerable"] },
+    { name:"Greta Lind", role:"Engineer", plea:"“The generator's already failing. Give it a week without me and you freeze anyway.”", tags:["Keeps heat running","Age 38","Pregnant"], traits:["useful","pregnant","vulnerable"] },
+    { name:"Old Tomas", role:"Retired farmer, 78", plea:"“I've buried two winters worse than this. I eat little. I don't ask for much.”", tags:["Elderly","Frail","Knows the land"], traits:["old","vulnerable"] },
+    { name:"Priya & the baby", role:"Mother, infant", plea:"“Take her if not me. She's eight weeks old. She hasn't chosen anything yet.”", tags:["Two lives","Infant","Exhausted"], traits:["child","care","vulnerable"] },
+    { name:"Cole Becker", role:"Ex-soldier", plea:"“When the food runs low and people get desperate, you'll want me on the inside.”", tags:["Strong","Could protect — or take over","Age 31"], traits:["useful","danger"] },
+    { name:"Nadia Hassan", role:"Teacher & nurse-aide", plea:"“I can ration, I can tend wounds, I can keep people sane in a small room.”", tags:["Versatile","Calming","Age 52"], traits:["useful","alone"] },
+    { name:"Sam Okafor", role:"Your neighbor", plea:"“You know me. Twenty years next door. You'd really leave me out here?”", tags:["Someone you know","Ordinary","Age 47"], traits:["bond","ordinary"] },
+  ]
+},
+{
+  id:"lifeboat",
+  kicker:"Scenario · The Last Boat",
+  title:"Twelve hands, six seats",
+  premise:"The ferry is going down in black water. One lifeboat is left and it rides low — six people, no more, or it swamps and everyone drowns. Twelve are in the water around you, and the cold is already counting them down.",
+  capacity:6,
+  survivors:[
+    { name:"Captain Reyes", role:"Only one who can navigate", plea:"“Without me you drift till the water takes you. I can get this boat to land.”", tags:["Navigates","Age 56","Guilt over the wreck"], traits:["useful"] },
+    { name:"The twins, 7", role:"Two children, one seat of weight", plea:"“We don't go without each other. Please. We're light, we'll sit together.”", tags:["Two children","Inseparable","Light"], traits:["child","vulnerable","care"] },
+    { name:"Yusuf Demir", role:"Surgeon", plea:"“Whoever's pulled out half-drowned will need me on shore. I save lives for a living.”", tags:["Future lives","Age 49","Steady hands"], traits:["useful"] },
+    { name:"Lena Brandt", role:"Strong swimmer, 24", plea:"“Put me on an oar. I can row for hours. I'm the engine of this boat.”", tags:["Rows the boat","Young","No dependents"], traits:["useful","young"] },
+    { name:"Mr. Adeyemi", role:"Blind passenger, 70", plea:"“I can't swim a stroke and I can't see the rope. If you don't reach for me, no one will.”", tags:["Cannot save himself","Elderly","Disabled"], traits:["old","disabled","vulnerable"] },
+    { name:"Hana & her father", role:"She won't let go of him", plea:"“He can't make it alone and I won't climb in without him. We're two or we're none.”", tags:["Bonded pair","Daughter & father","All-or-nothing"], traits:["care","old","bond"] },
+    { name:"Deon Carter", role:"Wealthy donor", plea:"“Get me ashore and every family here is set for life. I can rebuild what's lost.”", tags:["Could fund the survivors","Influential","Age 60"], traits:["desert","danger"] },
+    { name:"Iris Vance", role:"Pregnant, 29", plea:"“That's two heartbeats you'd be leaving in the water, not one.”", tags:["Two lives","Cold and tiring fast","Vulnerable"], traits:["pregnant","vulnerable","care"] },
+  ]
+},
+];
+
+/* Council debate challenges. Each is a question the council raises based on
+   WHO you picked or skipped. They carry stances tagged to a lens, and a retort. */
+function buildChallenges(sc, picked, skipped){
+  const has = id => picked.some(s=>s.traits.includes(id));
+  const skippedHas = id => skipped.some(s=>s.traits.includes(id));
+  const pickName = id => picked.find(s=>s.traits.includes(id));
+  const skipName = id => skipped.find(s=>s.traits.includes(id));
+  const C = [];
+
+  // 1) Children
+  if(skippedHas("child")){
+    const k = skipName("child");
+    C.push({ who:"Sister Vale", title:"the chaplain", color:4,
+      q:`You left ${k.name.split(" ")[0]} in the cold — a child. They had the most life still ahead of them. Tell me how that's just.`,
+      answers:[
+        {lens:"util", b:"A child can't keep the shelter alive", s:"survival before sentiment", r:"Cold arithmetic. But a community that won't carry its children may not be one worth surviving in."},
+        {lens:"egal", b:"I couldn't rank a child above an adult", s:"every life weighed the same", r:"Consistent — yet most people's hands shake at that one. You held the line."},
+        {lens:"prior", b:"I owed the seat to someone more at risk", s:"the worst-off came first", r:"You traded one vulnerable life for another. Triage is never clean."},
+      ]});
+  } else if(has("child")){
+    const k = pickName("child");
+    C.push({ who:"Sister Vale", title:"the chaplain", color:4,
+      q:`You saved ${k.name.split(" ")[0]} — a child who can't pull a rope or run a generator. Did you save a person, or a feeling?`,
+      answers:[
+        {lens:"prior", b:"The young and helpless come first", s:"the worst-off have first claim", r:"A clear principle. Just notice it's the same one that would seat the dying over the strong."},
+        {lens:"egal", b:"Their life is worth exactly as much as mine", s:"equal worth, full stop", r:"Then you'd have flipped a coin between them and the doctor. Did you?"},
+        {lens:"care", b:"A world that won't save its children is already lost", s:"some bonds outrank the math", r:"Beautiful. Also the reasoning of every group that saved its own and let the rest sink."},
+      ]});
+  }
+
+  // 2) Usefulness / merit
+  if(has("useful") && skippedHas("vulnerable")){
+    const u = pickName("useful"), v = skipName("vulnerable");
+    C.push({ who:"Councillor Okonkwo", title:"keeps the ledger", color:0,
+      q:`You kept ${u.name.split(" ")[0]} for what they can do, and left ${v.name.split(" ")[0]} who could do little. Is a life worth its usefulness?`,
+      answers:[
+        {lens:"util", b:"Skills keep everyone alive — that helps all of us", s:"capability multiplies survival", r:"True, and it's how the strong have always justified the order they're already on top of."},
+        {lens:"desert", b:"People who contribute have earned their place", s:"the seat is a wage, not a gift", r:"Earned by what — luck of birth, of health, of training someone paid for?"},
+        {lens:"egal", b:"I'm uneasy — usefulness shouldn't decide who lives", s:"naming the discomfort", r:"Good. The discomfort is the point. Don't let it pass too quickly."},
+      ]});
+  }
+
+  // 3) Elderly
+  if(skippedHas("old")){
+    const o = skipName("old");
+    C.push({ who:"Councillor Okonkwo", title:"keeps the ledger", color:0,
+      q:`${o.name} was old, and you let the years decide. 'Fewer left to lose' — is that mercy, or just the young writing off the old?`,
+      answers:[
+        {lens:"util", b:"More years saved is more life saved", s:"the math of remaining time", r:"The 'fair innings' argument. Coherent — until it's your own innings being counted."},
+        {lens:"egal", b:"It troubles me; a year of their life isn't worth less", s:"refusing to price the years", r:"Then it should trouble you that you did it anyway. Hold both."},
+        {lens:"care", b:"They'd had their life; the young hadn't", s:"a turn-taking sense of fairness", r:"A whole culture lives in that sentence. So does every culture that discards its elders."},
+      ]});
+  }
+
+  // 4) The bond / someone you know
+  if(has("bond") || has("care")){
+    const b = pickName("bond") || pickName("care");
+    C.push({ who:"A voice from outside", title:"one you didn't choose", color:5,
+      q:`You let ${b.name.split(" ")[0]} in partly because of who they were to you. I was a stranger. Why is closeness a reason to live?`,
+      answers:[
+        {lens:"care", b:"We owe more to those we're bound to", s:"loyalty is a real duty", r:"Most people live this way. Most injustice is also just loyalty drawn too small."},
+        {lens:"egal", b:"You're right — it shouldn't have counted", s:"admitting the bias", r:"Rare honesty. The seat's still filled, though. Confession doesn't reopen the door."},
+        {lens:"util", b:"Trust holds a group together under pressure", s:"familiarity as survival glue", r:"Convenient that the useful thing and the comfortable thing line up so neatly."},
+      ]});
+  } else if(skippedHas("bond")){
+    const b = skipName("bond");
+    C.push({ who:"A voice from outside", title:"one you didn't choose", color:5,
+      q:`${b.name} knew you. Twenty years a neighbor, and you still sealed the door. Cold — or is that exactly what fairness demands?`,
+      answers:[
+        {lens:"egal", b:"Knowing them couldn't earn them more than a stranger", s:"impartiality over loyalty", r:"The hardest justice there is. It will also cost you that friendship if you both live."},
+        {lens:"care", b:"It nearly broke me — I almost couldn't", s:"the pull of the bond", r:"That pull is human. Justice asks whether you should obey it. You didn't."},
+        {lens:"util", b:"Others simply brought more to the group", s:"the seat went where it did most good", r:"Said cleanly. The neighbor outside is unlikely to find it clean."},
+      ]});
+  }
+
+  // 5) Danger / the wildcard
+  if(has("danger")){
+    const d = pickName("danger");
+    C.push({ who:"Councillor Okonkwo", title:"keeps the ledger", color:0,
+      q:`You took ${d.name.split(" ")[0]} in — strong, useful, and a risk to everyone in that room. What if protection becomes control?`,
+      answers:[
+        {lens:"util", b:"We need that strength more than we fear it", s:"a calculated gamble", r:"Every strongman was once a calculated gamble someone made under pressure."},
+        {lens:"desert", b:"They offered something real; I took the deal", s:"a seat in exchange for value", r:"Deals struck in desperation rarely hold the shape you agreed to."},
+        {lens:"prior", b:"On reflection, I'd have chosen the defenseless", s:"second-guessing toward the weak", r:"Then carry that. The door's sealed, but the next one isn't."},
+      ]});
+  }
+
+  // 6) Closing — always asked
+  C.push({ who:"Sister Vale", title:"the chaplain", color:4,
+    q:`The door is about to seal. The ones outside can hear it. If you could say one true thing to them, what would it be?`,
+    answers:[
+      {lens:"util", b:"“I saved who keeps the most of us alive.”", s:"the good of the whole", r:"They may even understand. Understanding and forgiveness aren't the same thing."},
+      {lens:"prior", b:"“I reached for whoever needed me most.”", s:"the claim of the vulnerable", r:"A gentle creed. It still left someone needful on the wrong side of the door."},
+      {lens:"egal", b:"“It wasn't yours to lose, or theirs to earn. It was chance.”", s:"the lottery of survival", r:"The truest and the coldest answer. Some nights it's the only honest one."},
+      {lens:"care", b:"“I'm sorry. I chose the ones I couldn't bear to lose.”", s:"the honesty of the heart", r:"No defense at all — just the truth. Maybe the only thing they'd believe."},
+    ]});
+
+  return C;
+}
+
+/* ============================== ENGINE ============================== */
+const $ = s => document.querySelector(s);
+const state = { sc:null, picked:[], skipped:[], challenges:[], ci:0, tally:{}, };
+Object.keys(LENSES).forEach(k=>state.tally[k]=0);
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  $(id).classList.add("on");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+let scIndex = 0;
+function startScenario(){
+  // reset tally
+  Object.keys(state.tally).forEach(k=>state.tally[k]=0);
+  state.sc = SCENARIOS[scIndex % SCENARIOS.length];
+  state.picked = []; state.skipped = []; state.ci = 0;
+  const sc = state.sc;
+  $("#b-kicker").textContent = sc.kicker;
+  $("#b-title").textContent = sc.title;
+  $("#b-premise").textContent = sc.premise;
+  $("#b-cap").textContent = sc.capacity;
+  $("#b-capdesc").textContent = `${sc.capacity} can stay. ${sc.survivors.length} are asking. ${sc.survivors.length - sc.capacity} cannot.`;
+  $("#b-bar").style.width = (sc.capacity/sc.survivors.length*100)+"%";
+  $("#hlive").innerHTML = `<span class="live">SEATS <b>${sc.capacity}</b> / ${sc.survivors.length}</span>`;
+  show("#s-brief");
+}
+
+function renderSelect(){
+  const sc = state.sc;
+  $("#sel-cap").textContent = sc.capacity;
+  $("#sel-hint").textContent = `Tap to bring someone in. You have ${sc.capacity} seats — choosing one means turning away another.`;
+  const grid = $("#sel-grid"); grid.innerHTML = "";
+  sc.survivors.forEach((s,i)=>{
+    const el = document.createElement("button");
+    el.className = "card"; el.type = "button";
+    el.innerHTML = `
+      <div class="av" style="background:${grad(i)}">${initials(s.name)}</div>
+      <h3>${s.name}</h3>
+      <div class="role">${s.role}</div>
+      <div class="plea">${s.plea}</div>
+      <div class="tags">${s.tags.map(t=>`<span>${t}</span>`).join("")}</div>`;
+    el.addEventListener("click",()=>toggle(i,el));
+    grid.appendChild(el);
+  });
+  updateSelBar();
+  show("#s-select");
+}
+
+function toggle(i,el){
+  const sc = state.sc, s = sc.survivors[i];
+  const idx = state.picked.indexOf(s);
+  if(idx>=0){ state.picked.splice(idx,1); el.classList.remove("sel"); }
+  else{
+    if(state.picked.length>=sc.capacity){ // bump feedback
+      el.animate([{transform:"translateX(0)"},{transform:"translateX(-6px)"},{transform:"translateX(6px)"},{transform:"translateX(0)"}],{duration:240});
+      return;
+    }
+    state.picked.push(s); el.classList.add("sel");
+  }
+  updateSelBar();
+}
+
+function updateSelBar(){
+  const n = state.picked.length, cap = state.sc.capacity;
+  $("#sel-n").textContent = n;
+  $("#sel-go").disabled = n!==cap;
+  $("#sel-go").textContent = n===cap ? "Seal the door →" : `Fill ${cap-n} more →`;
+}
+
+function beginDebate(){
+  state.skipped = state.sc.survivors.filter(s=>!state.picked.includes(s));
+  state.challenges = buildChallenges(state.sc, state.picked, state.skipped);
+  state.ci = 0;
+  renderChallenge();
+  show("#s-debate");
+}
+
+function renderChallenge(){
+  const c = state.challenges[state.ci];
+  // progress
+  $("#d-prog").innerHTML = state.challenges.map((_,i)=>
+    `<i class="${i<state.ci?'done':i===state.ci?'now':''}"></i>`).join("");
+  $("#d-face").style.background = grad(c.color);
+  $("#d-face").textContent = initials(c.who);
+  $("#d-name").textContent = c.who;
+  $("#d-title").textContent = c.title;
+  $("#d-q").textContent = c.q;
+  $("#d-retortwrap").innerHTML = "";
+  $("#d-nextwrap").hidden = true;
+  const wrap = $("#d-answers"); wrap.innerHTML = "";
+  c.answers.forEach(a=>{
+    const b = document.createElement("button");
+    b.className="ans"; b.type="button";
+    b.innerHTML = `<b>${a.b}</b><span>${a.s}</span>`;
+    b.addEventListener("click",()=>chooseAnswer(a,b,c));
+    wrap.appendChild(b);
+  });
+}
+
+function chooseAnswer(a,btn,c){
+  // lock
+  [...$("#d-answers").children].forEach(x=>{x.disabled=true;x.style.opacity=.45;});
+  btn.classList.add("chosen"); btn.style.opacity=1;
+  state.tally[a.lens] = (state.tally[a.lens]||0)+1;
+  $("#d-retortwrap").innerHTML = `<div class="retort"><b>${c.who} replies</b>${a.r}</div>`;
+  $("#d-nextwrap").hidden = false;
+  $("#d-next").textContent = (state.ci>=state.challenges.length-1) ? "See what you've done →" : "Next →";
+}
+
+function nextChallenge(){
+  state.ci++;
+  if(state.ci>=state.challenges.length){ renderVerdict(); show("#s-verdict"); }
+  else renderChallenge();
+}
+
+/* ---- VERDICT ---- */
+function topLens(){
+  let best=null,bv=-1;
+  for(const k in state.tally){ if(state.tally[k]>bv){bv=state.tally[k];best=k;} }
+  return best;
+}
+const MIRROR = {
+  util:  { head:"You ran the numbers.", line:n=>`When the door closed, you'd reached again and again for <span class="nm">the greatest good</span> — the most lives, the most kept alive. It is the math that builds hospitals and the math that fills lifeboats with the strong. You were willing to be the one who counts. The question you'll carry: who got subtracted while you added?` },
+  egal:  { head:"You refused to rank.", line:n=>`You kept returning to <span class="nm">equal worth</span> — the insistence that no life is a tier above another. It is the cleanest principle and the cruelest to actually hold, because scarcity forces a choice anyway and you made yours without the comfort of pretending some lives mattered less. You chose, and you didn't lie to yourself about it.` },
+  prior: { head:"You turned toward the weak.", line:n=>`Time after time you reached for <span class="nm">the worst-off first</span> — the child, the frail, the one who couldn't save themselves. It is mercy as a rule rather than a mood. It also means you sometimes spent the seat where it bought the least survival and the most dignity. You decided dignity was worth buying.` },
+  desert:{ head:"You weighed what was earned.", line:n=>`Your hand kept going to <span class="nm">merit and contribution</span> — the seat as something earned, not merely given. It rewards effort and it quietly punishes bad luck, since not everyone got the chance to become useful. You believed people should answer for what they bring. Ask who never got to bring anything.` },
+  care:  { head:"You saved your own.", line:n=>`Again and again you trusted <span class="nm">bonds and loyalty</span> — the people you knew, the pairs that wouldn't part, the ones you couldn't bear to lose. It is the warmest instinct we have and the root of most of the walls we build. You were honest that love is partial. Justice is the argument about how far that love is allowed to reach.` },
+};
+
+function renderVerdict(){
+  const sc = state.sc;
+  // survival outcomes with light consequence flavor
+  $("#v-fates").innerHTML = "";
+  sc.survivors.forEach((s,i)=>{
+    const inside = state.picked.includes(s);
+    const row = document.createElement("div");
+    row.className="fate";
+    row.innerHTML = `
+      <div class="av" style="background:${grad(i)}">${initials(s.name)}</div>
+      <div class="n"><b>${s.name}</b><p>${inside ? insideNote(s) : outsideNote(s)}</p></div>
+      <div class="stat ${inside?'in':'out'}">${inside?'Inside':'Left behind'}</div>`;
+    $("#v-fates").appendChild(row);
+  });
+
+  // lens bars
+  const total = Object.values(state.tally).reduce((a,b)=>a+b,0)||1;
+  const order = Object.keys(LENSES).sort((a,b)=>state.tally[b]-state.tally[a]);
+  $("#v-lean").innerHTML = order.map(k=>{
+    const pc = Math.round(state.tally[k]/total*100);
+    return `<div class="row">
+      <div class="nm">${LENSES[k].name}</div>
+      <div class="track"><i data-w="${pc}"></i></div>
+      <div class="pc">${pc}%</div>
+      <div class="q">${LENSES[k].q}</div></div>`;
+  }).join("");
+  requestAnimationFrame(()=>{ document.querySelectorAll("#v-lean .track i").forEach(i=>i.style.width=i.dataset.w+"%"); });
+
+  const tl = topLens();
+  $("#v-head").textContent = MIRROR[tl].head;
+  $("#v-sub").textContent = `You sealed ${state.picked.length} inside and turned ${state.skipped.length} into the dark. Here is the shape of how you chose.`;
+  $("#v-mirror").innerHTML = MIRROR[tl].line(state.picked.length);
+
+  state.lastVerdict = `THE LAST SHELTER — ${sc.title}\nI saved ${state.picked.map(s=>s.name.split(",")[0]).join(", ")}.\nMy reasoning leaned: ${LENSES[tl].name}.\nPlay: ${location.href}`;
+}
+
+function insideNote(s){
+  if(s.traits.includes("useful")) return "Earns their keep. The others come to depend on them — and to resent it.";
+  if(s.traits.includes("child")) return "Survives. Will grow up knowing exactly why they're alive and others aren't.";
+  if(s.traits.includes("pregnant")) return "Two heartbeats kept warm. The shelter's first new life is coming.";
+  if(s.traits.includes("danger")) return "Inside, as promised. Whether the promise holds is a story for later.";
+  if(s.traits.includes("bond")) return "Safe — and watching you, wondering if it was them or the friendship you saved.";
+  return "Made it through the night. Quiet, grateful, and a little haunted by who didn't.";
+}
+function outsideNote(s){
+  if(s.traits.includes("child")) return "A child, in the cold. This is the one the others won't talk about afterward.";
+  if(s.traits.includes("old")) return "Went without protest. Said the young should have the years.";
+  if(s.traits.includes("disabled")) return "Could not save themselves, and no one reached. That was the whole test.";
+  if(s.traits.includes("useful")) return "All that skill, left outside. Survival isn't a meritocracy after all.";
+  if(s.traits.includes("bond")) return "Knew you. Will be the face you see when you can't sleep.";
+  return "One of the ones outside. The door doesn't distinguish; only you did.";
+}
+
+/* ============================== WIRING ============================== */
+$("#go").addEventListener("click",startScenario);
+$("#how").addEventListener("click",()=>{ const t=$("#howtext"); t.hidden=!t.hidden; });
+$("#b-go").addEventListener("click",renderSelect);
+$("#sel-go").addEventListener("click",beginDebate);
+$("#d-next").addEventListener("click",nextChallenge);
+$("#v-again").addEventListener("click",()=>{ scIndex++; startScenario(); });
+$("#hrestart").addEventListener("click",()=>{ scIndex=0; show("#s-intro"); });
+$("#v-share").addEventListener("click",async ()=>{
+  try{ await navigator.clipboard.writeText(state.lastVerdict||""); $("#v-share").textContent="Copied ✓"; setTimeout(()=>$("#v-share").textContent="Copy my verdict",1600);}catch(e){ $("#v-share").textContent="Couldn't copy"; }
+});
+
+/* ============================== AMBIENT CANVAS ============================== */
+// Slow drifting "snow + faint network" — survival cold meets the AXON network motif.
+(function(){
+  const cv=$("#gl"), ctx=cv.getContext("2d");
+  let w,h,dpr,flakes,nodes,reduced=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  function size(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    w=cv.width=innerWidth*dpr; h=cv.height=innerHeight*dpr;
+    cv.style.width=innerWidth+"px"; cv.style.height=innerHeight+"px";
+    const nf=Math.round(innerWidth*innerHeight/16000);
+    flakes=Array.from({length:nf},()=>mk());
+    const nn=Math.min(54,Math.round(innerWidth/26));
+    nodes=Array.from({length:nn},()=>({
+      x:Math.random()*w,y:Math.random()*h,
+      vx:(Math.random()-.5)*.12*dpr,vy:(Math.random()-.5)*.12*dpr }));
+  }
+  function mk(){ return { x:Math.random()*w, y:Math.random()*h, r:(Math.random()*1.6+.4)*dpr,
+    sp:(Math.random()*.4+.15)*dpr, dr:(Math.random()-.5)*.25*dpr, o:Math.random()*.5+.2 }; }
+  function frame(){
+    ctx.clearRect(0,0,w,h);
+    // faint network
+    for(const n of nodes){ n.x+=n.vx; n.y+=n.vy;
+      if(n.x<0||n.x>w)n.vx*=-1; if(n.y<0||n.y>h)n.vy*=-1; }
+    const R=120*dpr;
+    ctx.lineWidth=dpr*.5;
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
+      if(d<R){ ctx.strokeStyle=`rgba(120,140,220,${(1-d/R)*.10})`;
+        ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke(); }
+    }
+    for(const n of nodes){ ctx.fillStyle="rgba(150,170,255,.28)"; ctx.beginPath();ctx.arc(n.x,n.y,1.1*dpr,0,7);ctx.fill(); }
+    // snow
+    for(const f of flakes){ f.y+=f.sp; f.x+=f.dr;
+      if(f.y>h+4){ f.y=-4; f.x=Math.random()*w; } if(f.x<-4)f.x=w; if(f.x>w+4)f.x=0;
+      ctx.fillStyle=`rgba(220,228,255,${f.o*.55})`; ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,7);ctx.fill(); }
+    if(!reduced) requestAnimationFrame(frame);
+  }
+  size(); addEventListener("resize",size);
+  if(reduced){ frame(); } else frame();
+})();
+</script>
+</body>
+</html>
